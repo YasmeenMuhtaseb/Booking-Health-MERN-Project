@@ -1,0 +1,23 @@
+.logo{
+    width: 14%;
+    margin-top: 0px;
+    margin-right: 250px;
+    margin-left: 25px;
+}
+
+.Nav{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+ul{
+    display: flex;
+    list-style: none;
+    width: 57%;
+}
+
+li{
+    padding: 10px;
+    margin-left: 35px;
+}

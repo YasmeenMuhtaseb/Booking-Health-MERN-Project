@@ -1,0 +1,23 @@
+.mainImg{
+    max-width:100%;
+}
+
+.qutoue{
+    position: absolute;
+    font-size: 255%;
+    color: #30b4bb;
+    top: 10px;
+    left: 35px;
+    width: 30%;
+    min-height: 80%;
+}
+
+.main{
+    position: relative;
+}
+
+.qutoueblue{
+    color:#296870;
+    font-family: fantasy;
+
+}
