@@ -11,4 +11,10 @@ module.exports = app => {
     app.get('/api/findUsers',BookingController.findUsers);
     app.put('/api/doctor/:id',BookingController.makeDoctor);
     app.post('/api/addSpecialization',BookingController.createSpecialization);
+    app.post('/api/addAppointment/:patientid/:docid',BookingController.createAppointment);
+    app.put('/api/addAppointment/:patientid/:docid/:appointmentid',BookingController.addAppointment);
+    app.get('/api/findAppointment',BookingController.findAppointments);
+    app.post('/api/createHistory', BookingController.createHistory);
+    app.put('/api/addHistory/:id/:historyid', BookingController.addHistory);
+    app.get('/api/findHistories', BookingController.findHistories);
 }

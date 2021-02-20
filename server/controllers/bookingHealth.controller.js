@@ -80,3 +80,46 @@ module.exports.findUsers = (req,res) => {
     .then(users => res.json(users))
     .catch(err => res.json(err))
 }
+
+module.exports.findAppointments = (req, res) => {
+    Appointment.find()
+    .then(appointments => res.json(appointments))
+    .catch(err => console.log(err))
+}
+
+module.exports.createAppointment = (req, res) => {
+    Appointment.create({
+        time: req.body.time,
+        patient: req.params.patientid,
+        doctor: req.params.docid
+    })
+    .then(appointment => res.json(appointment))
+    .catch(err => console.log(err))
+}
+
+module.exports.addAppointment = (req, res) => {
+    User.findOneAndUpdate({_id:req.params.docid},{$addToSet: {appointment:req.params.appointmentid}},{new:true,runValidators:true})
+    .then(updatedUser => res.json(updatedUser))
+    .catch(err => console.log(err));
+    User.findOneAndUpdate({_id:req.params.patientid},{$addToSet: {appointment:req.params.appointmentid}},{new:true,runValidators:true})
+    .then(updatedUser => res.json(updatedUser))
+    .catch(err => console.log(err));
+}
+
+module.exports.findHistories = (req, res) => {
+    History.find()
+    .then(histories => res.json(histories))
+    .catch(err => console.log(err))
+}
+
+module.exports.createHistory = (req, res) => {
+    History.create(req.body)
+    .then(history => res.json(history))
+    .catch(err => console.log(err))
+}
+
+module.exports.addHistory = (req, res) => {
+    User.findOneAndUpdate({_id:req.params.id},{history:req.params.historyid},{new:true,runValidators:true}).populate('history')
+    .then(updatedUser => res.json(updatedUser))
+    .catch(err => console.log(err));
+}
