@@ -8,6 +8,8 @@ import Box from '@material-ui/core/Box';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
+import { ThemeProvider, createMuiTheme} from "@material-ui/core/styles";
+import {cyan} from "@material-ui/core/colors";
 
 function Copyright() {
   return (
@@ -47,11 +49,24 @@ const useStyles = makeStyles((theme) => ({
       },
 }));
 
+const theme = createMuiTheme({
+    palette: {
+        primary: {
+            main: cyan[600],
+        },
+        secondary: {
+            main: cyan[600],
+        }
+    }
+
+});
+
 export default function SignIn() {
   const classes = useStyles();
 
   return (
     <Container component="main" maxWidth="xs">
+         <ThemeProvider theme={theme}>
       <div className={classes.paper}>
       <img src ={logo} width="50%" height ="50%" className={classes.imgStyle}></img>
         <form className={classes.form} >
@@ -90,6 +105,7 @@ export default function SignIn() {
             </Grid>
         </form>
       </div>
+      </ThemeProvider>
       <Box mt={3}>
         <Copyright />
       </Box>
