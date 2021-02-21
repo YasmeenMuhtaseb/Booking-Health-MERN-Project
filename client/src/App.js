@@ -3,9 +3,10 @@ import Corona from './components/corona/Corona'
 import HomePhoto from './components/HomePhoto/HomePhoto'
 import SignIn from './components/Login/SingIn'
 import NavBar from './components/NavBar/NavBar'
+import PopUpLogin from './components/PopUpLogin/PopUpLogin'
 import SignUp from './components/Registration/SignUp'
 import Special from './components/Specialization/Special'
-import './App.css';
+// import './App.css';
 
 
 
@@ -16,11 +17,12 @@ function App() {
     <div className="App">
       <NavBar/>
       <HomePhoto/>
-      <Calender/>
+      {/* <Calender/> */}
       <Special/>
       <Corona/>
       {/* <SignIn/> */}
-      {/* <SignUp/> */}
+      <SignUp/>
+      <PopUpLogin/>
     </div>
   );
 }

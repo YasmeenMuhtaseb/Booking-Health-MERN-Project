@@ -3,6 +3,7 @@ import logo from '../../Images/logo.png'
 import { Button, Typography } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 import './NavBar.css'
+import PopUpLogin from '../PopUpLogin/PopUpLogin';
 
 const useStyles = makeStyles({
     root: {
@@ -26,7 +27,7 @@ export default () => {
                 <li><Button className={classes.new}  >Specializations</Button></li>
                 <li><Button className={classes.new}  >Doctors</Button></li>
                 <li><Button className={classes.new}  >About us</Button></li>
-                <li><Button  className={classes.new} >Login</Button></li>
+                <li><PopUpLogin/></li>
             </ul>
             {/* <Typography>Hi</Typography> */}
         </div>
