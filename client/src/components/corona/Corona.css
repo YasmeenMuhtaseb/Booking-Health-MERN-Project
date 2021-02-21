@@ -1,0 +1,41 @@
+.coronaImg{
+    width: 50%;
+    margin-right: 5%;
+}
+
+.maincorona{
+    display: flex;
+    justify-content: space-between;
+    align-items: end;
+    background-color: #eff1ff;
+    margin: 0%;
+}
+
+.mainL{
+    display: inline;
+    margin-right: 10%;
+    margin-left: 5%;
+    width: 35%;
+    margin-top: 2%;
+    font-family: sans-serif;
+    width: 40%;
+    color: #5f646b;
+
+
+}
+
+.qutoueblue{
+    color:#296870;
+    font-family: sans-serif;
+    font-weight: 700;
+
+
+}
+
+.coronah2{
+    width: 50%;
+    font-family: monospace;
+    color: #013243;
+    font-style: normal;
+    font-weight: 700;
+}

@@ -1,0 +1,31 @@
+.special{
+    width: 50%;
+}
+
+.spec{
+    display: flex;
+    justify-content: space-between;
+    align-items: end;
+    background-color: #eff1ff;
+    margin: 0%;
+}
+
+.rightP{
+    display: inline;
+    margin-right: 10%;
+    width: 35%;
+    margin-top: 2%;
+    font-family: sans-serif;
+    width: 40%;
+    color: #5f646b;
+
+
+}
+
+.h2spec{
+    width: 50%;
+    font-family: monospace;
+    color: #013243;
+    font-style: normal;
+    font-weight: 700;
+}

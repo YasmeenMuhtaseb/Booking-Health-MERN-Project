@@ -7,7 +7,7 @@ import './NavBar.css'
 const useStyles = makeStyles({
     root: {
         backgroundColor: '#0a7f8a',
-        color: "black",
+        color: "white",
         
     },
     new:{
@@ -23,7 +23,7 @@ export default () => {
             <img class="logo" src={logo} alt="Logo" />
             <ul>
                 <li><Button className={classes.root}  >Home</Button></li>
-                <li><Button className={classes.new}  >Departments</Button></li>
+                <li><Button className={classes.new}  >Specializations</Button></li>
                 <li><Button className={classes.new}  >Doctors</Button></li>
                 <li><Button className={classes.new}  >About us</Button></li>
                 <li><Button  className={classes.new} >Login</Button></li>

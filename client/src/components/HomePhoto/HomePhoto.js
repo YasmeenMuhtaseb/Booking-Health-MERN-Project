@@ -1,6 +1,6 @@
 import React from 'react'
 import './HomePhoto.css'
-import HomePhoto from '../../Images/home.jpg'
+import HomePhoto from '../../Images/Homw2.webp'
 
 export default () => {
     return (

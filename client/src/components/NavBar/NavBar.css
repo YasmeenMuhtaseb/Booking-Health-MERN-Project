@@ -1,5 +1,5 @@
 .logo{
-    width: 14%;
+    width: 10%;
     margin-top: 0px;
     margin-right: 250px;
     margin-left: 25px;
@@ -7,14 +7,18 @@
 
 .Nav{
     display: flex;
-    justify-content: space-between;
-    align-items: center;
+    background-color: hsla(0,0%,100%,.966);
+    opacity: .98;
+    box-shadow: 0 6px 6px -6px #777;
+    position: sticky;
+    top: 0;
+    z-index: 1;
 }
 
 ul{
     display: flex;
     list-style: none;
-    width: 57%;
+    width: 59%;
 }
 
 li{

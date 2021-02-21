@@ -4,20 +4,21 @@
 
 .qutoue{
     position: absolute;
-    font-size: 255%;
+    font-size: 167%;
     color: #30b4bb;
     top: 10px;
     left: 35px;
-    width: 30%;
+    width: 44%;
     min-height: 80%;
 }
 
 .main{
     position: relative;
+    margin: -1%;
 }
 
 .qutoueblue{
     color:#296870;
-    font-family: fantasy;
+    font-family: sans-serif;
 
 }
