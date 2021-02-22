@@ -9,7 +9,8 @@ import PopUpLogin from './components/PopUpLogin/PopUpLogin'
 import PopUpSignIn from './components/PopUpSignIn/PopUpSignIn'
 import SignUp from './components/Registration/SignUp'
 import Special from './components/Specialization/Special'
-import './App.css';
+import AboutUs from './components/AboutUs/AboutUs'
+// import './App.css';
 
 
 
@@ -27,11 +28,10 @@ function App() {
     <div className="App">
       <NavBar />
       <HomePhoto/>
-      {/* <Calender/> */}
       <Special/>
       <Corona/>
       <PopUpSignIn/>
-      {/* <SignIn/> */}
+      <AboutUs/>
     </div>
   );
 }
