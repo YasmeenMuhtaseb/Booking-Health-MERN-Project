@@ -51,7 +51,7 @@ const logout =(e) =>{
         <div className="Nav">
             <img className="logo" src={logo} alt="Logo" />
             {/* {cookies.get("user") ? <p className="name">{cookies.get('user').firstName} {cookies.get('user').lastName}</p> : "" } */}
-            <ul>
+            <ul className="ulNavBar">
                 <li><Button className={classes.root}  >Home</Button></li>
                 <li><Button className={classes.new}  >Specializations</Button></li>
                 <li><Button className={classes.new}  >Doctors</Button></li>

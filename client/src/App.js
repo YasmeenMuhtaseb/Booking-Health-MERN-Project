@@ -9,7 +9,7 @@ import PopUpLogin from './components/PopUpLogin/PopUpLogin'
 import PopUpSignIn from './components/PopUpSignIn/PopUpSignIn'
 import SignUp from './components/Registration/SignUp'
 import Special from './components/Specialization/Special'
-// import './App.css';
+import './App.css';
 
 
 

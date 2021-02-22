@@ -23,7 +23,7 @@
     z-index: 1;
 }
 
-ul{
+.ulNavBar{
     display: flex;
     list-style: none;
     width: 100%;
