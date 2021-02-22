@@ -23,7 +23,7 @@ const useStyles = makeStyles({
     log:{
         color:"#30b4bb",
         marginLeft: "2%",
-        marginBottom: "1%",
+        marginBottom: "2%",
     },
 });
 

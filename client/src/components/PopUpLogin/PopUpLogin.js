@@ -13,8 +13,7 @@ import {navigate} from '@reach/router'
 import Cookies from 'universal-cookie'
 import { ThemeProvider, createMuiTheme} from "@material-ui/core/styles";
 import {cyan} from "@material-ui/core/colors";
-import Box from '@material-ui/core/Box';
-import Typography from '@material-ui/core/Typography';
+
 
 
 
