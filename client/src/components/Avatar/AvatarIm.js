@@ -25,7 +25,7 @@ export default ()=> {
   return (
     <div className={classes.root}>
       {/* <Avatar alt="Remy Sharp" src="/static/images/avatar/1.jpg" className={classes.small} /> */}
-      <Avatar  src="/static/images/avatar/1.jpg" />
+      <a href='/testtt'><Avatar src="/static/images/avatar/1.jpg" /></a>
       {/* <Avatar alt="Remy Sharp" src="/static/images/avatar/1.jpg" className={classes.large} /> */}
     </div>
   );

@@ -66,20 +66,8 @@ export default (props) => {
     setOpen(false);
   };
 
-  const fnameHandler = (e) => {
-    setFirstName(e.target.value)
-  }
-
-  const lnameHandler = e => {
-      setLastName(e.target.value)
-  }
-
   const emailHandler =  e => {
       setEmail(e.target.value)
-  }
-
-  const phoneHandler = e => {
-      setPhoneNumber(e.target.value)
   }
 
   const passwordHandler = e => {
@@ -88,18 +76,14 @@ export default (props) => {
 
   const submitHandler = (e) => {
       e.preventDefault();
-      axios.post("http://localhost:8000/api/register", {
-          firstName,
-          lastName,
+      axios.post("http://localhost:8000/api/login", {
           email,
-          phoneNumber,
           password
       }, {withCredentials: true})
       .then(res => {
         cookies.set("user",res.data.user)
         setOpen(false);
         props.loginReRender(!reRendered)
-
       })
       .catch(err => console.log(err))
   }
@@ -108,7 +92,7 @@ export default (props) => {
   return (
     <div>
       <Button variant="outlined" className={classes.new} onClick={handleClickOpen}>
-        Sign up
+        Login
       </Button>
       <Dialog
         open={open}
@@ -129,31 +113,6 @@ export default (props) => {
               className={classes.imgStyle}
             ></img>
             <Grid container spacing={2}>
-              <Grid item xs={12} sm={6}>
-                <TextField
-                  autoComplete="fname"
-                  name="firstName"
-                  variant="outlined"
-                  required
-                  fullWidth
-                  id="firstName"
-                  label="First Name"
-                  onChange={fnameHandler}
-                  autoFocus
-                />
-              </Grid>
-              <Grid item xs={12} sm={6}>
-                <TextField
-                  variant="outlined"
-                  required
-                  fullWidth
-                  id="lastName"
-                  label="Last Name"
-                  name="lastName"
-                  autoComplete="lname"
-                  onChange={lnameHandler}
-                />
-              </Grid>
               <Grid item xs={12}>
                 <TextField
                   variant="outlined"
@@ -164,18 +123,6 @@ export default (props) => {
                   name="email"
                   autoComplete="email"
                   onChange={emailHandler}
-                />
-              </Grid>
-              <Grid item xs={12}>
-                <TextField
-                  variant="outlined"
-                  required
-                  fullWidth
-                  id="phoneNumber"
-                  label="Phone Number"
-                  name="phoneNumber"
-                  autoComplete="phoneNumber"
-                  onChange={phoneHandler}
                 />
               </Grid>
               <Grid item xs={12}>
@@ -200,14 +147,9 @@ export default (props) => {
               color="primary"
               className={classes.submit}
             >
-              Sign Up
+              Sign in
             </Button>
-            <Grid item>
-              <Link href="#" variant="body2" className={classes.linkStyle}>
-                Already have an account? Sign in
-              </Link>
-            </Grid>
-          
+            
           {/* <Button onClick={handleClose} color="primary">
             Cancel
           </Button>

@@ -6,6 +6,7 @@ import HomePhoto from './components/HomePhoto/HomePhoto'
 import SignIn from './components/Login/SingIn'
 import NavBar from './components/NavBar/NavBar'
 import PopUpLogin from './components/PopUpLogin/PopUpLogin'
+import PopUpSignIn from './components/PopUpSignIn/PopUpSignIn'
 import SignUp from './components/Registration/SignUp'
 import Special from './components/Specialization/Special'
 // import './App.css';
@@ -29,6 +30,7 @@ function App() {
       {/* <Calender/> */}
       <Special/>
       <Corona/>
+      <PopUpSignIn/>
       {/* <SignIn/> */}
     </div>
   );

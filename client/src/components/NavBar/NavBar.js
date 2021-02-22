@@ -8,6 +8,7 @@ import Cookies from 'universal-cookie'
 import axios from 'axios';
 import {navigate} from '@reach/router'
 import AvatarIm from '../Avatar/AvatarIm';
+import PopUpSignIn from '../PopUpSignIn/PopUpSignIn';
 
 const useStyles = makeStyles({
     root: {
@@ -21,8 +22,8 @@ const useStyles = makeStyles({
     },
     log:{
         color:"#30b4bb",
-        marginLeft: "1%",
-        marginBottom: "0%",
+        marginLeft: "2%",
+        marginBottom: "1%",
     },
 });
 
@@ -55,7 +56,7 @@ const logout =(e) =>{
                 <li><Button className={classes.new}  >Specializations</Button></li>
                 <li><Button className={classes.new}  >Doctors</Button></li>
                 <li><Button className={classes.new}  >About us</Button></li>
-                { !cookies.get('user')? <li><PopUpLogin loginReRender={reRenderHandler} /></li> :<><AvatarIm/> <Button className={classes.log} onClick={logout} >Logout</Button></>}
+                { !cookies.get('user')?<div className="log"> <PopUpLogin loginReRender={reRenderHandler} /><PopUpSignIn   loginReRender={reRenderHandler} /> </div>:<><AvatarIm/> <Button className={classes.log} onClick={logout} >Logout</Button></>}
             </ul>
             {/* <Typography>Hi</Typography> */}
         </div>
