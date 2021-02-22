@@ -42,6 +42,7 @@ module.exports.login = async(req, res) => {
 
 module.exports.logout =  (req, res) => {
     res.clearCookie('usertoken');
+    res.clearCookie('user');
     res.sendStatus(200);
 }
 

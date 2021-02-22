@@ -1,3 +1,5 @@
+import { useEffect, useState } from 'react'
+import Cookies from 'universal-cookie'
 import Calender from './components/Calender/Calender'
 import Corona from './components/corona/Corona'
 import HomePhoto from './components/HomePhoto/HomePhoto'
@@ -13,16 +15,21 @@ import Special from './components/Specialization/Special'
 
 
 function App() {
+  const cookie = new Cookies();
+
+  useEffect(() => {
+    cookie.get('user');
+    console.log(cookie)
+  },[])
+
   return (
     <div className="App">
-      <NavBar/>
+      <NavBar />
       <HomePhoto/>
       {/* <Calender/> */}
       <Special/>
       <Corona/>
       {/* <SignIn/> */}
-      <SignUp/>
-      <PopUpLogin/>
     </div>
   );
 }
