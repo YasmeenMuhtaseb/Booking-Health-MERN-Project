@@ -11,6 +11,12 @@ import logo from "../../Images/logo1.png";
 import axios from 'axios'
 import {navigate} from '@reach/router'
 import Cookies from 'universal-cookie'
+import { ThemeProvider, createMuiTheme} from "@material-ui/core/styles";
+import {cyan} from "@material-ui/core/colors";
+import Box from '@material-ui/core/Box';
+import Typography from '@material-ui/core/Typography';
+
+
 
 
 
@@ -54,6 +60,17 @@ cont:{
     marginLeft:"35%"
 }
 }));
+const theme = createMuiTheme({
+    palette: {
+        primary: {
+            main: cyan[600],
+        },
+        secondary: {
+            main: cyan[600],
+        }
+    }
+
+});
 
 export default (props) => {
   const [open, setOpen] = React.useState(false);
@@ -118,6 +135,7 @@ export default (props) => {
       <Button variant="outlined" className={classes.new} onClick={handleClickOpen}>
         Sign up
       </Button>
+      <ThemeProvider theme={theme}>
       <Dialog
         open={open}
         onClose={handleClose}
@@ -238,6 +256,8 @@ export default (props) => {
         </form>
         </DialogContent>
       </Dialog>
+      </ThemeProvider>
+      
     </div>
   );
 };
