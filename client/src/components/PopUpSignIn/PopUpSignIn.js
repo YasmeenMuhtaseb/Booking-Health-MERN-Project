@@ -31,6 +31,14 @@ const useStyles = makeStyles((theme) => ({
       backgroundColor: "#00c4cc",
     },
   },
+  noSubmit: {
+    margin: theme.spacing(2, 0, 1),
+    backgroundColor: "gray",
+    color: "white",
+    "&:hover": {
+      backgroundColor: "#00c4cc",
+    },
+  },
   linkStyle: {
     color: "#0a7f8a",
   },
@@ -140,7 +148,16 @@ export default (props) => {
               </Grid>
             </Grid>
           <DialogActions>
-            <Button
+          { (password.length)<8 ?
+          <Button
+              fullWidth
+              variant="contained"
+              color="primary"
+              className={classes.noSubmit}
+            >
+                sign in
+                </Button>
+            :<Button
               type="submit"
               fullWidth
               variant="contained"
@@ -148,7 +165,7 @@ export default (props) => {
               className={classes.submit}
             >
               Sign in
-            </Button>
+            </Button>}
             
           {/* <Button onClick={handleClose} color="primary">
             Cancel

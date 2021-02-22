@@ -31,6 +31,14 @@ const useStyles = makeStyles((theme) => ({
       backgroundColor: "#00c4cc",
     },
   },
+  noSubmit: {
+    margin: theme.spacing(2, 0, 1),
+    backgroundColor: "gray",
+    color: "white",
+    "&:hover": {
+      backgroundColor: "#00c4cc",
+    },
+  },
   linkStyle: {
     color: "#0a7f8a",
   },
@@ -129,6 +137,7 @@ export default (props) => {
               className={classes.imgStyle}
             ></img>
             <Grid container spacing={2}>
+            {(firstName.length)<2 ? <p style={{color:"gray"}}>First Name should be more than 2 char</p>:<p></p>}
               <Grid item xs={12} sm={6}>
                 <TextField
                   autoComplete="fname"
@@ -166,6 +175,7 @@ export default (props) => {
                   onChange={emailHandler}
                 />
               </Grid>
+              {(phoneNumber.length)<10 ? <p style={{color:"gray"}}>PhoneNumber should be at least 10 numbers</p>:<p></p>}
               <Grid item xs={12}>
                 <TextField
                   variant="outlined"
@@ -178,6 +188,7 @@ export default (props) => {
                   onChange={phoneHandler}
                 />
               </Grid>
+              {(password.length)<8 ? <p style={{color:"gray"}}>Password should be at least 8 char   </p>:<p></p>}
               <Grid item xs={12}>
                 <TextField
                   variant="outlined"
@@ -193,7 +204,16 @@ export default (props) => {
               </Grid>
             </Grid>
           <DialogActions>
-            <Button
+              { (password.length)<8 ?
+          <Button
+              fullWidth
+              variant="contained"
+              color="primary"
+              className={classes.noSubmit}
+            >
+                sign up
+                </Button>
+            :<Button
               type="submit"
               fullWidth
               variant="contained"
@@ -201,11 +221,11 @@ export default (props) => {
               className={classes.submit}
             >
               Sign Up
-            </Button>
+            </Button>}
             <Grid item>
-              <Link href="#" variant="body2" className={classes.linkStyle}>
+              {/* <Link href="#" variant="body2" className={classes.linkStyle}>
                 Already have an account? Sign in
-              </Link>
+              </Link> */}
             </Grid>
           
           {/* <Button onClick={handleClose} color="primary">
