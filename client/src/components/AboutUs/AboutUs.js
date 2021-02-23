@@ -21,7 +21,7 @@ function AboutUs() {
                         <div className="col-lg-6 d-flex flex-column justify-content-center pt-4 pt-lg-0 order-2 order-lg-1"
                             data-aos="fade-up" data-aos-delay="200">
                             <h1 className ="fontStyle">Your health is our top priority and concern</h1>
-                            <h2 className ="fontStyle">Ourselves suffering the sincerity. <br/> Inhabit her manners adapted age certain, Debating offended at branched striking be subjects</h2>
+                            <h2 className ="fontStyle">Our doctors give the most sincere services. <br/> Our doctors are very experienced and offer the best services for each patient. Your safety is guaranteed on Booking Health.</h2>
                         </div>
                         <div className="col-lg-6 order-1 order-lg-2 hero-img" data-aos="zoom-in" data-aos-delay="200">
                             <img src={main} className="img-fluid animated" alt="text" />

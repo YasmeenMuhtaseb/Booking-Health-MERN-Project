@@ -17,4 +17,6 @@ module.exports = app => {
     app.post('/api/createHistory', BookingController.createHistory);
     app.put('/api/addHistory/:id/:historyid', BookingController.addHistory);
     app.get('/api/findHistories', BookingController.findHistories);
+    app.get('/api/findSpecializations', BookingController.findSpecilizations);
+
 }

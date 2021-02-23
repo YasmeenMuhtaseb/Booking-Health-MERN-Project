@@ -122,7 +122,7 @@ export default (props) => {
           password,
       }, {withCredentials: true})
       .then(res => {
-        cookies.set("user",res.data.user)
+        cookies.set("user", res.data.user)
         setOpen(false);
         props.loginReRender(!reRendered)
         setErrors("")

@@ -67,7 +67,7 @@ module.exports.createProfile  = (req, res) => {
     .catch(err => res.json(err))
 }
 module.exports.findUser = (req,res) => {
-    User.findOne({_id:req.params.id})
+    User.findOne({_id:req.params.id}).populate('profile')
     .then(user => res.json(user))
     .catch(err => res.json(err))
 }
@@ -77,7 +77,7 @@ module.exports.findProfile = (req,res) => {
     .catch(err => res.json(err))
 }
 module.exports.findUsers = (req,res) => {
-    User.find()
+    User.find().populate('profile')
     .then(users => res.json(users))
     .catch(err => res.json(err))
 }
@@ -123,4 +123,10 @@ module.exports.addHistory = (req, res) => {
     User.findOneAndUpdate({_id:req.params.id},{history:req.params.historyid},{new:true,runValidators:true}).populate('history')
     .then(updatedUser => res.json(updatedUser))
     .catch(err => console.log(err));
+}
+
+module.exports.findSpecilizations = (req, res) => {
+    Specialization.find()
+        .then(specializations => res.json(specializations))
+        .catch(err => console.log(err))
 }

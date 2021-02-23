@@ -1,6 +1,7 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Avatar from '@material-ui/core/Avatar';
+import Cookies from 'universal-cookie';
 // import logo from '../../Images/logo.png'
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -21,11 +22,13 @@ const useStyles = makeStyles((theme) => ({
 
 export default ()=> {
   const classes = useStyles();
+  const cookies = new Cookies();
+  const userId = cookies.get('user')._id
 
   return (
     <div className={classes.root}>
       {/* <Avatar alt="Remy Sharp" src="/static/images/avatar/1.jpg" className={classes.small} /> */}
-      <a href='/testtt'><Avatar src="/static/images/avatar/1.jpg" /></a>
+      <a href={`/profile/${userId}`}><Avatar src="/static/images/avatar/1.jpg" /></a>
       {/* <Avatar alt="Remy Sharp" src="/static/images/avatar/1.jpg" className={classes.large} /> */}
     </div>
   );

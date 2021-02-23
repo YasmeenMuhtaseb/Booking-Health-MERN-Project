@@ -7,8 +7,8 @@ export default() => {
         <div class="spec">
             <img class="special" src={image} alt="image"/>
             <div class="rightP">
-                <h2 class="h2spec">We Are Specialize in Medical Diagnositics</h2>
-            <p class="specP">Booking is a website that enables users to know the departments and doctors in the hospital, enables the patient to book an appointment with the doctor and communicate with him.</p>
+                <h2 class="h2spec">We Specialize in Medical Diagnositics</h2>
+            <p class="specP">Booking Health is a website that enables users to know the departments and doctors available, it enables the patient to book an appointment with a doctor and communicate with him.</p>
             </div>
         </div>
     )
