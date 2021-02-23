@@ -81,6 +81,7 @@ export default (props) => {
   const [password, setPassword] = useState("")
   const cookies = new Cookies();
   const [reRendered, setReRender] = useState(false)
+  const [errors,setErrors]=useState("")
 
   const handleClickOpen = () => {
     setOpen(true);
@@ -88,6 +89,7 @@ export default (props) => {
 
   const handleClose = () => {
     setOpen(false);
+    setErrors("")
   };
 
   const fnameHandler = (e) => {
@@ -117,15 +119,16 @@ export default (props) => {
           lastName,
           email,
           phoneNumber,
-          password
+          password,
       }, {withCredentials: true})
       .then(res => {
         cookies.set("user",res.data.user)
         setOpen(false);
         props.loginReRender(!reRendered)
+        setErrors("")
 
       })
-      .catch(err => console.log(err))
+      .catch(err => setErrors(err.response.data.errors))
   }
 
 
@@ -166,6 +169,7 @@ export default (props) => {
                   label="First Name"
                   onChange={fnameHandler}
                   autoFocus
+                  error={errors.firstName}
                 />
               </Grid>
               <Grid item xs={12} sm={6}>
@@ -178,11 +182,13 @@ export default (props) => {
                   name="lastName"
                   autoComplete="lname"
                   onChange={lnameHandler}
+                  error={errors.lastName}
                 />
               </Grid>
               <Grid item xs={12}>
                 <TextField
                   variant="outlined"
+                  type="email"
                   required
                   fullWidth
                   id="email"
@@ -190,6 +196,7 @@ export default (props) => {
                   name="email"
                   autoComplete="email"
                   onChange={emailHandler}
+                  error={errors.email}
                 />
               </Grid>
               {(phoneNumber.length)<10 ? <p style={{color:"gray"}}>PhoneNumber should be at least 10 numbers</p>:<p></p>}
@@ -203,6 +210,7 @@ export default (props) => {
                   name="phoneNumber"
                   autoComplete="phoneNumber"
                   onChange={phoneHandler}
+                  error={errors.phoneNumber}
                 />
               </Grid>
               {(password.length)<8 ? <p style={{color:"gray"}}>Password should be at least 8 char   </p>:<p></p>}
@@ -217,6 +225,7 @@ export default (props) => {
                   id="password"
                   autoComplete="current-password"
                   onChange={passwordHandler}
+                  error={errors.password}
                 />
               </Grid>
             </Grid>

@@ -30,7 +30,6 @@ function App() {
       <HomePhoto/>
       <Special/>
       <Corona/>
-      <PopUpSignIn/>
       <AboutUs/>
     </div>
   );

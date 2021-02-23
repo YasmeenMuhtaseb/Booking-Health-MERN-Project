@@ -146,6 +146,7 @@ export default (props) => {
                   name="email"
                   autoComplete="email"
                   onChange={emailHandler}
+                  type="email"
                 />
               </Grid>
               <Grid item xs={12}>
