@@ -119,7 +119,7 @@ export default (props) => {
           lastName,
           email,
           phoneNumber,
-          password
+          password,
       }, {withCredentials: true})
       .then(res => {
         cookies.set("user", res.data.user)
