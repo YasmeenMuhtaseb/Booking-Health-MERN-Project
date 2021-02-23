@@ -9,6 +9,7 @@ import axios from 'axios';
 import {navigate} from '@reach/router'
 import AvatarIm from '../Avatar/AvatarIm';
 import PopUpSignIn from '../PopUpSignIn/PopUpSignIn';
+import { useRef } from 'react';
 
 const useStyles = makeStyles({
     root: {
@@ -30,7 +31,7 @@ const useStyles = makeStyles({
 export default () => {
     const classes=useStyles();
     const cookies = new Cookies();
-    const [loginReRender, setLoginReRender] = useState(false)
+    const [loginReRender, setLoginReRender] = useState(false);
 
     
 
@@ -52,9 +53,9 @@ const logout =(e) =>{
             <img className="logo" src={logo} alt="Logo" />
             {/* {cookies.get("user") ? <p className="name">{cookies.get('user').firstName} {cookies.get('user').lastName}</p> : "" } */}
             <ul className="ulNavBar">
-                <li><Button className={classes.root}  >Home</Button></li>
-                <li><Button className={classes.new}  >Specializations</Button></li>
-                <li><Button className={classes.new}  >Doctors</Button></li>
+                <li><Button className={classes.root} onClick={() => navigate("/")} >Home</Button></li>
+                <li><Button className={classes.new} onClick={() => navigate("/specializations")} >Specializations</Button></li>
+                <li><Button className={classes.new} onClick={() => navigate("/doctors")} >Doctors</Button></li>
                 <li><Button className={classes.new}  >About us</Button></li>
                 { !cookies.get('user')?<div className="log"> <PopUpLogin loginReRender={reRenderHandler} /><PopUpSignIn   loginReRender={reRenderHandler} /> </div>:<><AvatarIm/> <Button className={classes.log} onClick={logout} >Logout</Button></>}
             </ul>

@@ -1,0 +1,8 @@
+
+p.paragraph{
+    max-height: 120px;
+    overflow: hidden;
+}
+img {
+    height: 1%;
+}
