@@ -5,6 +5,7 @@ import './App.css';
 import { Router } from '@reach/router'
 import  Home  from './components/Home/Home'
 import AllDoctors from './components/AllDoctors/AllDoctors'
+import Profile from './components/profile/profile';
 
 
 
@@ -21,6 +22,7 @@ function App() {
         <Specializations path="/specializations" />
         <AllDoctors path="/doctors" />
       </Router>
+      <Profile/>
     </div>
   );
 }
