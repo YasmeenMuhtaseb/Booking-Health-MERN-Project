@@ -7,22 +7,29 @@ import  Home  from './components/Home/Home'
 import AllDoctors from './components/AllDoctors/AllDoctors'
 import Message from './components/Chat/Message';
 import Profile from './components/profile/profile';
+import Profiles from './components/Profiles/Profiles';
+import { useState } from 'react';
 
 
 
 
 
 function App() {
+  const [reRender, setReRender] = useState(false)
+
+  const reRenderNav = () => {
+    setReRender(!reRender)
+  }
 
   return (
     <div className="App">
-      <NavBar />
+      <NavBar render={reRender}/>
       <Router>
         <Home path="/" />
-        <DoctorDetails path="/profile/:id"/>
+        <Profiles path="/profile/:id" reRender={reRenderNav}/>
         <Specializations path="/specializations" />
         <AllDoctors path="/doctors" />
-        <Profile path="/myProfile/:id"/>
+        
       </Router>
       
       {/* <Message /> */}

@@ -23,9 +23,9 @@ const Profiles = (props) => {
         loaded?
         <>
         { doc?
-            <DoctorDetails id={props.id}/>
+            <DoctorDetails reRender={props.reRender} id={props.id}/>
             :
-            <Profile id={props.id} /> }
+            <Profile reRender={props.reRender} id={props.id} /> }
         </>
         : ""
     )

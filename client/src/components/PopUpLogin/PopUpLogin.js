@@ -134,7 +134,7 @@ export default (props) => {
 
   return (
     <div>
-      <Button variant="outlined" className={classes.new} onClick={handleClickOpen}>
+      <Button className={classes.new} onClick={handleClickOpen}>
         Sign up
       </Button>
       <ThemeProvider theme={theme}>

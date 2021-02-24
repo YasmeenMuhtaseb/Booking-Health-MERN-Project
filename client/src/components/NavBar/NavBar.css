@@ -1,17 +1,18 @@
 .logo{
     width: 10%;
     margin-top: 0px;
-    margin-right: 245px;
-    margin-left: 25px;
+    margin-right: 19%;
+    margin-left: 2%;
 }
 .log{
     display: flex;
     justify-content: space-between;
     align-items: center;
-    width: 24%;
-    margin-bottom: 2%;
-    margin-left: 3%;
+    width: 21%;
+    margin-bottom: 3.2%;
+    margin-left: 2%;
 }
+
 
 .Nav{
     display: flex;
@@ -29,9 +30,9 @@
     width: 100%;
     margin-top: 2%;
     margin-bottom: 0%;
+    margin-left: 14%;
 }
 
 li{
     padding: 5px;
-    margin-left: 25px;
 }

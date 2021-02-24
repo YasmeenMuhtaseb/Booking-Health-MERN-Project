@@ -91,7 +91,7 @@ module.exports.findUsers = (req,res) => {
 }
 
 module.exports.findAppointments = (req, res) => {
-    Appointment.find()
+    Appointment.find().populate('patient').populate('doctor')
     .then(appointments => res.json(appointments))
     .catch(err => console.log(err))
 }

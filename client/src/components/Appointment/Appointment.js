@@ -5,6 +5,8 @@ import * as Mui from "@material-ui/core"
 import * as MuiIcons from "@material-ui/icons"
 import "fontsource-roboto";
 import {blue, cyan} from "@material-ui/core/colors";
+import Cookies from 'universal-cookie';
+import axios from 'axios';
 
 const theme = Mui.createMuiTheme({
     palette: {
@@ -49,28 +51,21 @@ const StyledTableRow = Mui.withStyles((theme) => ({
     },
 }))(Mui.TableRow);
 
-function createData(name, time, date, status) {
-    return { name, time, date, status};
-}
-
-const rows = [
-    createData('Kamal Nouri', "18:39", 14/2/2020, "Not Approved"),
-    createData('John Wick', "16:23", 1/3/2021, "Approved"),
-    createData('Joe Biden', "9:09", 22/5/2021, "Not Approved"),
-    createData('Donald Trump', "7:47", 9/9/2021, "Approved"),
-];
-
 const useStyles = Mui.makeStyles({
     table: {
         minWidth: 700,
     },
 });
 
-function ButtonApprove() {
+function ButtonApprove(props) {
+        
+    const liftHandler = e => {
+        props.approved(props.patientId, props.doctorId, props.appointmentId);
+    }
         return <Mui.Button
         startIcon={<MuiIcons.Done/>}
         variant={"contained"}
-        onClick={() => alert("Status is updated!!")}
+        onClick={liftHandler}
         color={"primary"}
         size={"small"}
         style={
@@ -96,9 +91,10 @@ function ButtonReject() {
     </Mui.Button>
 }
 
-export default function Appointment() {
+export default function Appointment(props) {
     const classes = useStyles();
-
+    const cookies = new Cookies();
+    const user = cookies.get('user');
 
     return (
         <Mui.ThemeProvider theme={theme}>
@@ -119,20 +115,18 @@ export default function Appointment() {
                                     <StyledTableCell>Patient Name</StyledTableCell>
                                     <StyledTableCell align="right">Time</StyledTableCell>
                                     <StyledTableCell align="center" style={{"paddingLeft":"12em"}}>Date</StyledTableCell>
-                                    <StyledTableCell align="center" style={{"paddingLeft":"12em"}}>Actions</StyledTableCell>
-                                    <StyledTableCell align="right" style={{"paddingRight":"3em"}}>Status</StyledTableCell>
+                                    {user._id === props.viewer._id ? <StyledTableCell align="center" style={{"paddingLeft":"12em"}}>Actions</StyledTableCell> : ""}
                                 </Mui.TableRow>
                             </Mui.TableHead>
                             <Mui.TableBody>
-                                {rows.map((row) => (
-                                    <StyledTableRow key={row.name}>
+                                {props.appointments.map((appointment) => (
+                                    <StyledTableRow key={appointment._id}>
                                         <StyledTableCell component="th" scope="row">
-                                            {row.name}
+                                            {appointment.patient.firstName} {appointment.patient.lastName}
                                         </StyledTableCell>
-                                        <StyledTableCell align="right">{row.time}</StyledTableCell>
-                                        <StyledTableCell align="right">{row.date}</StyledTableCell>
-                                        <StyledTableCell align="right"><ButtonApprove/>     <ButtonReject/></StyledTableCell>
-                                        <StyledTableCell align="right">{row.status}</StyledTableCell>
+                                        <StyledTableCell align="right">{appointment.time}</StyledTableCell>
+                                        <StyledTableCell align="right">{appointment.date}</StyledTableCell>
+                                        {user._id === props.viewer._id && appointment.status === false? <StyledTableCell align="right"><ButtonApprove approved={props.approve} patientId={appointment.patient._id} doctorId={appointment.doctor._id} appointmentId={appointment._id}/>     <ButtonReject/></StyledTableCell> : "" }
                                     </StyledTableRow>
                                 ))}
                             </Mui.TableBody>

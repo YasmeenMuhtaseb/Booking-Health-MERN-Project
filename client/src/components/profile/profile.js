@@ -127,7 +127,7 @@ const Profile = (props) => {
         const formData = new FormData();
         formData.append('upload', filename);
         axios.put('http://localhost:8000/api/user/' + user._id, formData)
-            .then(res => console.log("dooooooooooooooooooooooone"));
+            .then(res => props.reRender());
     }
     return (
         <div>
@@ -142,19 +142,17 @@ const Profile = (props) => {
                             <img src={profile} alt="" />
                             }
                             
-                            <form onSubmit={updateProfilePicture} style ={{marginTop: "7%"}}>
-                          
-                      
-                        <TextField
-                                        id="upload image"
-                                        label=""
-                                        variant="outlined"
-                                        type="file"
-                                        name="image"
-                                        filename="upload"
-                                        onChange={(e) => setFilename(e.target.files[0])}
-                                    />
-                                      <Button
+                        {user._id === props.id? <form onSubmit={updateProfilePicture} style ={{marginTop: "7%"}}>
+                            <TextField
+                                id="upload image"
+                                label=""
+                                variant="outlined"
+                                type="file"
+                                name="image"
+                                filename="upload"
+                                onChange={(e) => setFilename(e.target.files[0])}
+                            />
+                            <Button
                                 type="submit"
                                 fullWidth
                                 variant="contained"
@@ -162,11 +160,9 @@ const Profile = (props) => {
                                 className={classes.submit}
                             >
                                 Update Picture
-                        </Button>
-
-                            </form>
+                            </Button>
+                            </form> : ""}
                             
-                          
                         </div>
                         <div class="row">
                             <h6 className="content">Email:{user.email}</h6>
@@ -193,7 +189,6 @@ const Profile = (props) => {
                                         type={"text"}
                                         label={"Illness"}
                                         placeholder={"Illness"}
-                                        autoFocus={true}
                                         size={"small"}
                                         margin={"normal"}
                                         style={{ "width": "100%" }}
@@ -297,9 +292,6 @@ const Profile = (props) => {
                         </Mui.ThemeProvider>
                     </div>
                 </div>
-
-               
-
             </div>
         </div>
     )

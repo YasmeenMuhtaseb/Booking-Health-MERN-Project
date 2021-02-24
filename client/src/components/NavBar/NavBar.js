@@ -28,7 +28,7 @@ const useStyles = makeStyles({
     },
 });
 
-export default () => {
+export default (props) => {
     const classes=useStyles();
     const cookies = new Cookies();
     const [loginReRender, setLoginReRender] = useState(false);
@@ -39,7 +39,7 @@ const logout =(e) =>{
     e.preventDefault();
     axios.get("http://localhost:8000/api/logout",{withCredentials:true})
     .then(res => {
-        setLoginReRender(false)
+        setLoginReRender(!loginReRender)
         console.log(cookies.get('user'))
         navigate("/")
     })
@@ -55,11 +55,11 @@ const logout =(e) =>{
             <img className="logo" src={logo} alt="Logo" />
             {/* {cookies.get("user") ? <p className="name">{cookies.get('user').firstName} {cookies.get('user').lastName}</p> : "" } */}
             <ul className="ulNavBar">
-                <li><Button className={classes.root} onClick={() => navigate("/")} >Home</Button></li>
+                <li><Button className={classes.new} onClick={() => navigate("/")} >Home</Button></li>
                 <li><Button className={classes.new} onClick={() => navigate("/specializations")} >Specializations</Button></li>
                 <li><Button className={classes.new} onClick={() => navigate("/doctors")} >Doctors</Button></li>
                 <li><Button className={classes.new}  >About us</Button></li>
-                { !cookies.get('user')?<div className="log"> <PopUpLogin loginReRender={reRenderHandler} /><PopUpSignIn   loginReRender={reRenderHandler} /> </div>:<><AvatarIm/> <Button className={classes.log} onClick={logout} >Logout</Button></>}
+                { !cookies.get('user')?<div className="log"> <PopUpLogin loginReRender={reRenderHandler} /><PopUpSignIn   loginReRender={reRenderHandler} /></div>:<><AvatarIm reRender={props.render}/> <Button className={classes.log} onClick={logout} >Logout</Button></>}
             </ul>
             {/* <Typography>Hi</Typography> */}
         </div>

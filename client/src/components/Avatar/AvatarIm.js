@@ -20,15 +20,17 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default ()=> {
+export default (props)=> {
   const classes = useStyles();
   const cookies = new Cookies();
+  const user = cookies.get('user')
   const userId = cookies.get('user')._id
 
   return (
+    
     <div className={classes.root}>
       {/* <Avatar alt="Remy Sharp" src="/static/images/avatar/1.jpg" className={classes.small} /> */}
-      <a href={`/myProfile/${userId}`}><Avatar src="/static/images/avatar/1.jpg" /></a>
+      <a href={`/profile/${userId}`}> {user.image ? <Avatar src={`../img/${user.image}`} /> :  <Avatar src="/static/images/avatar/1.jpg" /> }</a>
       {/* <Avatar alt="Remy Sharp" src="/static/images/avatar/1.jpg" className={classes.large} /> */}
     </div>
   );
