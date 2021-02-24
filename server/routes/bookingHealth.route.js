@@ -1,6 +1,17 @@
 const BookingController = require("../controllers/bookingHealth.controller");
 const auth = require('../config/jwt.config')
+var multer = require('multer');
 module.exports = app => {
+    var storage = multer.diskStorage({
+        destination: (req, file, callback) => {
+            callback(null, '../client/public/img')
+        },
+        filename: (req, file, callback) => {
+            callback(null, file.originalname)
+        }
+    });
+    var upload = multer({ storage: storage });
+    app.put('/api/user/:id', upload.single('upload'), BookingController.updateProfilePicture);
     app.post('/api/register',BookingController.register);
     app.post('/api/login',BookingController.login);
     app.get('/api/logout',BookingController.logout);
@@ -18,5 +29,6 @@ module.exports = app => {
     app.put('/api/addHistory/:id/:historyid', BookingController.addHistory);
     app.get('/api/findHistories', BookingController.findHistories);
     app.get('/api/findSpecializations', BookingController.findSpecilizations);
+
 
 }

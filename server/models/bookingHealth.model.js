@@ -67,6 +67,9 @@ const UserSchema = new mongoose.Schema(
         type:Number,
         default:0,
     },
+    image:{
+        type:String,
+    },
     profile: { type: mongoose.Schema.Types.ObjectId, ref: 'Profile' },
     history: [{ type: mongoose.Schema.Types.ObjectId, ref: 'History'}],
     appointment:[{type: mongoose.Schema.Types.ObjectId, ref:'Appointment'}],

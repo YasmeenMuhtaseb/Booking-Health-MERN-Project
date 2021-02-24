@@ -18,6 +18,14 @@ module.exports.register = (req, res) => {
         .catch(err => res.status(400).json(err));
     }
 
+module.exports.updateProfilePicture = (request, response,next) =>{
+    
+    console.log(request.file.originalname)
+    User.findOneAndUpdate({_id:request.params.id},{image:request.file.originalname},{new:true})
+    .then(user =>response.json(user))
+    .catch(err => response.status(400).json(err));
+}
+
 module.exports.login = async(req, res) => {
     const user = await User.findOne({ email: req.body.email })
     if(user === null) {
