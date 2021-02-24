@@ -28,7 +28,7 @@ export default ()=> {
   return (
     <div className={classes.root}>
       {/* <Avatar alt="Remy Sharp" src="/static/images/avatar/1.jpg" className={classes.small} /> */}
-      <a href={`/myProfile/${userId}`}><Avatar src="/static/images/avatar/1.jpg" /></a>
+      <a href={`/profile/${userId}`}><Avatar src="/static/images/avatar/1.jpg" /></a>
       {/* <Avatar alt="Remy Sharp" src="/static/images/avatar/1.jpg" className={classes.large} /> */}
     </div>
   );
