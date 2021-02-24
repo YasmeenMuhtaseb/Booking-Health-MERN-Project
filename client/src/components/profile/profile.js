@@ -117,8 +117,6 @@ const Profile = (props) => {
     }
     return (
         <div>
-            {console.log(updated)}
-            {console.log(user)}
             <div class="container emp-profile">
                 <div class="row">
                     <div class="col-md-3">
@@ -165,7 +163,7 @@ const Profile = (props) => {
                                                 </Mui.TableRow>
                                             </Mui.TableHead>
                                             <Mui.TableBody>
-                                {updated.map((his) => (
+                                {updated.length > 0 && updated.map((his) => (
                                     <StyledTableRow key={his._id}>
                                         {/* <StyledTableCell component="th" scope="row">
                                             {doctor.firstName} {doctor.lastName}

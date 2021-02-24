@@ -3,9 +3,11 @@ const bcrypt = require('bcrypt');
 
 const AppointmentSchema = new mongoose.Schema({
     time: {
-        type:Date,
+        type: String,
         required:[true,'Time is required']
     },
+    date : String,
+    status: {type: Boolean, default: false},
     patient: { type: mongoose.Schema.Types.ObjectId, ref: 'User' },
     doctor: { type: mongoose.Schema.Types.ObjectId, ref: 'User' },
 },{timestamps:true});
@@ -18,6 +20,8 @@ const HistorySchema = new mongoose.Schema({
 
 const SpecializationSchema = new mongoose.Schema({
     name:String,
+    description: String,
+    img: String,
 },{timestamps: true});
 
 const ProfileSchema = new mongoose.Schema(

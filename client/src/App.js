@@ -7,6 +7,8 @@ import  Home  from './components/Home/Home'
 import AllDoctors from './components/AllDoctors/AllDoctors'
 import Message from './components/Chat/Message';
 import Profile from './components/profile/profile';
+import Doctors from './components/Doctors/Doctors';
+import Profiles from './components/Profiles/Profiles';
 
 
 
@@ -19,10 +21,10 @@ function App() {
       <NavBar />
       <Router>
         <Home path="/" />
-        <DoctorDetails path="/profile/:id"/>
+        <Profiles path="/profile/:id" />
         <Specializations path="/specializations" />
         <AllDoctors path="/doctors" />
-        <Profile path="/myProfile/:id"/>
+        <Doctors path="/doctors/:name" />
       </Router>
       
       {/* <Message /> */}
