@@ -63,7 +63,6 @@ const AllDoctors = () => {
     useEffect(() => {
         axios.get("http://localhost:8000/api/findUsers")
             .then(res => {
-                console.log(res.data)
                 setDoctors(res.data.filter((user) => {
                 if(user.role === 1){
                     return user;

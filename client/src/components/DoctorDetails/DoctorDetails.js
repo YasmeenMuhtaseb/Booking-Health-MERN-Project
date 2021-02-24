@@ -1,15 +1,11 @@
-import React, { useState, useEffect } from 'react';
-import 'bootstrap/dist/css/bootstrap.min.css';
-// import './profileStyle.css';
-import * as Mui from "@material-ui/core";
+import React, { useEffect, useState } from 'react';
+import * as Mui from "@material-ui/core"
+import * as MuiIcons from "@material-ui/icons"
 import "fontsource-roboto";
-import { blue, cyan } from "@material-ui/core/colors";
-import * as MuiIcons from "@material-ui/icons";
-import profile from '../../Images/profile.png';
-import axios from 'axios'
+import {blue, cyan} from "@material-ui/core/colors";
+import Appointment from '../Appointment/Appointment';
 import { navigate } from '@reach/router';
-import Appointment from '../Appointment/Appointment'
-import Cookies from 'universal-cookie';
+import axios from 'axios';
 
 
 const theme = Mui.createMuiTheme({
@@ -21,166 +17,112 @@ const theme = Mui.createMuiTheme({
             main: blue[500],
         }
     },
-    typography: {
-        h1: {
-            fontSize: 60,
+    typography:{
+        h1:{
+            fontSize:60,
         }
     },
 
 })
 
-const StyledTableCell = Mui.withStyles((theme) => ({
-    palette: {
-        primary: {
-            main: cyan[900],
-        },
-        secondary: {
-            main: blue[500],
-        }
-    },
-    head: {
-        backgroundColor: theme.palette.primary.main,
-        color: theme.palette.common.white,
-    },
-    body: {
-        fontSize: 14,
-    },
-}))(Mui.TableCell);
-
-const StyledTableRow = Mui.withStyles((theme) => ({
-    root: {
-        '&:nth-of-type(odd)': {
-            backgroundColor: theme.palette.action.hover,
-        },
-    },
-}))(Mui.TableRow);
-
-const useStyles = Mui.makeStyles({
-    table: {
-        minWidth: 700,
-    },
-});
-
-const DoctorDetails = (props) => {
-    const classes = useStyles();
+export default function DoctorDetails(props) {
     const [loaded, setLoaded] = useState(false);
-    const [user, setUser] = useState("");
-    const [date, setDate] = useState("");
-    const [time, setTime] = useState("");
-    const [isPatient, setIsPatient] = useState(false);
-    const [appointments, setAppointments] = useState([])
-    const cookies = new Cookies();
-    const patient = cookies.get('user');
+    const [doctor, setDoctor] = useState("")
 
     useEffect(() => {
         axios.get('http://localhost:8000/api/findUser/' + props.id)
             .then(res =>{ 
-                setUser(res.data);
-            })
-        if(patient.role === 0){
-            setIsPatient(true);
-        }
-        axios.get('http://localhost:8000/api/findAppointment')
-            .then(res => {
-                setAppointments(res.data);
+                if(res.data.role !== 1){
+                    navigate("/")
+                }
+                setDoctor(res.data);
                 setLoaded(true);
+                
             })
-            .catch(err => console.log(err))
     }, [])
 
-    const approveHandler = (patientId, doctorId, appointmentId) => {
-        axios.put('http://localhost:8000/api/addAppointment/'+patientId +"/" + doctorId +"/"+appointmentId)
-        .then(res => {
-            axios.get('http://localhost:8000/api/findAppointment')
-            .then(res => {
-                setAppointments(res.data);})
-        })
-        .catch(err => console.log(err))
-    }
-
-
-    const dateHandler = e => {
-        setDate(e.target.value)
-    }
-
-    const timeHandler = e => {
-        setTime(e.target.value)
-    }
-
-    const submitHandler = (e) => {
-        e.preventDefault();
-        axios.post("http://localhost:8000/api/addAppointment/"+patient._id + "/" + user._id, {
-            time,
-            date
-        })
-            .then(res => {
-                setDate("");
-                setTime("");
-            })
-            .catch(err => console.log(err))
-    }
-
     return (
-        <div>
-            <div class="container emp-profile">
-                <div class="row">
-                    <div class="col-md-3">
-                        <div class="profile-img">
-                            <img src={profile} alt="" />
-                            <Mui.Button
-                                startIcon={<MuiIcons.Update />}
-                                variant={"contained"}
-                                onClick={() => alert("Form is submitted!!")}
+        loaded ?
+        <Mui.ThemeProvider theme={theme}>
+            <Mui.Container maxWidth={"lg"}>
+                <Mui.Typography
+                    variant={"h1"}
+                    component={"div"}
+                    color={"primary"}
+
+                >
+                    Doctor Profile
+                </Mui.Typography>
+                <Mui.Grid container lg={12}>
+                    <Mui.Grid container spacing={2} justify="center" lg={4}
+                              style={{"text-align": "center", "marginTop": "20px", "width": "100%"}}>
+                        <img className={"img"}/>
+                        <p>pic</p>
+
+                    </Mui.Grid>
+                    <Mui.Grid container spacing={2} justify="center" lg={8}
+                              style={{"marginTop": "20px"}}
+                    >
+                        <Mui.Grid item lg={12}>
+                            <Mui.Typography
+                                variant={"h5"}
+                                component={"div"}
                                 color={"primary"}
-                                size={"small"}
-                                style={
-                                    { fontSize: 15, marginTop: "3%", marginLeft: "3%", "width": "100%" }
-                                }
                             >
-                                Upload Picture
-                        </Mui.Button>
-                        </div>
-                        <div class="row">
-                            <h6 className="content">Email:{user.email}</h6>
-                            <h6 className="content">Phone Number: {user.phoneNumber}</h6>
-                        </div>
-                    </div>
-                    <div class="col-md-9">
-                        <div class="profile-head">
-                            <h4>{user.firstName} {user.lastName}</h4>
-                            <ul class="nav nav-tabs" id="myTab" role="tablist">
-                                <li class="nav-item">
-                                    <p class="nav-link active" >Appointments</p>
-                                </li>
-                            </ul>
-                        </div>
-                        <Appointment approve={approveHandler} viewer={user} appointments={appointments}/>
-                    </div>
-                </div>
-                {isPatient ? <form onSubmit={submitHandler}>
-                <Mui.ThemeProvider theme={theme}>
-                    <Mui.Container>
-                    <Mui.Typography
+                                {doctor.firstName} {doctor.lastName}
+                            </Mui.Typography>
+                        </Mui.Grid>
+                        <Mui.Grid item lg={12}>
+                            <Mui.Typography
+                                variant={"subtitle1"}
+                                component={"div"}
+                                color={"primary"}
+                            >
+                                {doctor.profile.specialization}
+                            </Mui.Typography>
+                        </Mui.Grid>
+                        <Mui.Grid item>
+                            <Mui.Typography
+                                variant={"p"}
+                                component={"div"}
+                                color={"primary"}
+                            >
+                                {doctor.about}
+                            </Mui.Typography>
+                            <Mui.Typography
+                                color={"primary"}
+                            >
+                                <ul>
+                                    <li>Location: {doctor.profile.loaction}</li>
+                                    <li>Education: {doctor.profile.education}</li>
+                                    <li>Email: {doctor.email}</li>
+                                    <li>Phone Number: {doctor.phoneNumber}</li>
+                                </ul>
+                            </Mui.Typography>
+                        </Mui.Grid>
+
+                    </Mui.Grid>
+                </Mui.Grid>
+                <Mui.Typography
                     variant={"h4"}
                     component={"div"}
                     color={"primary"}
                     style={{"textAlign": "center"}}
-                    >
+                >
                     Book Appointment
-                    </Mui.Typography>
+                </Mui.Typography>
                 <Mui.Grid container spacing={2} justify="center" lg={12}
-                        style={{"text-align": "center", "marginTop": "20px"}}>
+                          style={{"text-align": "center", "marginTop": "20px"}}>
                     <Mui.Grid item lg={12}>
                         <Mui.TextField
                             variant={"outlined"}
                             color={"primary"}
                             type={"time"}
+                            autoFocus={true}
                             size={"medium"}
                             margin={"normal"}
                             style={{"width": "20%"}}
-                            name="time"
-                            onChange={timeHandler}
-                            value={time}
+
                         />
                     </Mui.Grid>
 
@@ -191,39 +133,31 @@ const DoctorDetails = (props) => {
                             color={"primary"}
                             type={"date"}
                             size={"medium"}
-                            name="date"
                             style={{"width": "20%"}}
-                            onChange={dateHandler}
-                            value={date}
+
                         />
                         <br />
 
-                        <Mui.Button
-                            type="submit"
+                        <Mui.Button lg={12}
                             startIcon={<MuiIcons.Save/>}
                             variant={"contained"}
+                            onClick={() => alert("Form is submitted!!")}
                             color={"primary"}
-                            size={"small"}
+                            size={"medium"}
                             style={
-                                {fontSize: 15, marginTop: "20px", "width": "20%"}
+                                {fontSize: 24, marginTop: "20px", "width": "20%"}
                             }
                         >
                             Book!
                         </Mui.Button>
-                        
                     </Mui.Grid>
                 </Mui.Grid>
-
             </Mui.Container>
-                </Mui.ThemeProvider>
-                </form> : ""}
-
-            </div>
-        </div>
-    )
+            <Appointment />
+        </Mui.ThemeProvider>
+        : ""
+    );
 }
-
-export default DoctorDetails
 
 
 

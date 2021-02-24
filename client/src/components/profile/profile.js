@@ -131,6 +131,8 @@ const Profile = (props) => {
     }
     return (
         <div>
+            {console.log(updated)}
+            {console.log(user)}
             <div class="container emp-profile">
                 <div class="row">
                     <div class="col-md-3">
@@ -172,46 +174,7 @@ const Profile = (props) => {
                         </div>
                         <hr></hr>
                         <Mui.ThemeProvider theme={theme}>
-<<<<<<< HEAD
                     <Mui.Container style={{"marginLeft":"-4%"}}>
-=======
-                            <Mui.Container style={{ "text-align": "center" }}>
-                                <Mui.Grid container xs={12}>
-                                    <Mui.TableContainer component={Mui.Paper}>
-                                        <Mui.Table className={classes.table} aria-label="customized table">
-                                            <Mui.TableHead>
-                                                <Mui.TableRow>
-                                                    <StyledTableCell>illness</StyledTableCell>
-                                                    <StyledTableCell >Date</StyledTableCell>
-                                                    <StyledTableCell >Medicines</StyledTableCell>
-                                                    <StyledTableCell>Dose</StyledTableCell>
-                                                </Mui.TableRow>
-                                            </Mui.TableHead>
-                                            <Mui.TableBody>
-                                {updated.length > 0 && updated.map((his) => (
-                                    <StyledTableRow key={his._id}>
-                                        {/* <StyledTableCell component="th" scope="row">
-                                            {doctor.firstName} {doctor.lastName}
-                                        </StyledTableCell> */}
-                                        <StyledTableCell align="right">{his.illness}</StyledTableCell>
-                                        <StyledTableCell align="right">{his.date}</StyledTableCell>
-                                        <StyledTableCell align="right">{his.medicines}</StyledTableCell>
-                                        <StyledTableCell align="right">{his.dose}</StyledTableCell>
-                                        {/* <StyledTableCell align="right"><Link to={`/profile/${doctor._id}`}>Check Profile</Link></StyledTableCell> */}
-                                    </StyledTableRow>
-                                ))}
-                            </Mui.TableBody>
-                                        </Mui.Table>
-                                    </Mui.TableContainer>
-                                </Mui.Grid>
-                            </Mui.Container>
-                        </Mui.ThemeProvider>
-                    </div>
-                </div>
-
-                <Mui.ThemeProvider theme={theme}>
-                    <Mui.Container>
->>>>>>> 5b490d6ac8b6afcc9b3878d6108042b5fc544ad7
                         <Mui.Typography
                             variant={"h6"}
                             component={"div"}

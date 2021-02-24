@@ -76,9 +76,7 @@ module.exports.createProfile  = (req, res) => {
 }
 module.exports.findUser = (req,res) => {
     User.findOne({_id:req.params.id}).populate('profile').populate('history')
-    .then(user =>{ 
-        console.log(user)
-        res.json(user)})
+    .then(user => res.json(user))
     .catch(err => res.json(err))
 }
 module.exports.findProfile = (req,res) => {
@@ -93,7 +91,7 @@ module.exports.findUsers = (req,res) => {
 }
 
 module.exports.findAppointments = (req, res) => {
-    Appointment.find().populate('patient').populate('doctor')
+    Appointment.find()
     .then(appointments => res.json(appointments))
     .catch(err => console.log(err))
 }
@@ -101,7 +99,6 @@ module.exports.findAppointments = (req, res) => {
 module.exports.createAppointment = (req, res) => {
     Appointment.create({
         time: req.body.time,
-        date: req.body.date,
         patient: req.params.patientid,
         doctor: req.params.docid
     })
@@ -116,9 +113,6 @@ module.exports.addAppointment = (req, res) => {
     User.findOneAndUpdate({_id:req.params.patientid},{$addToSet: {appointment:req.params.appointmentid}},{new:true,runValidators:true})
     .then(updatedUser => res.json(updatedUser))
     .catch(err => console.log(err));
-    Appointment.findOneAndUpdate({_id:req.params.appointmentid}, {status: true}, {new:true,runValidators:true})
-    .then(updatedApp => res.json(updatedApp))
-    .catch(err => console.log(err))
 }
 
 module.exports.findHistories = (req, res) => {
