@@ -29,6 +29,7 @@ function App() {
         <Profiles path="/profile/:id" reRender={reRenderNav}/>
         <Specializations path="/specializations" />
         <AllDoctors path="/doctors" />
+        <Message path="/chat/:id"/>
         
       </Router>
       

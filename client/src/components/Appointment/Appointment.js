@@ -99,14 +99,6 @@ export default function Appointment(props) {
     return (
         <Mui.ThemeProvider theme={theme}>
             <Mui.Container maxWidth={"lg"} style={{"text-align": "center"}}>
-                <Mui.Typography
-                    variant={"h1"}
-                    component={"div"}
-                    color={"primary"}
-                    style={{"marginBottom":"10px"}}
-                >
-                    My Appointment Schedule
-                </Mui.Typography>
                 <Mui.Grid container lg={12}>
                     <Mui.TableContainer component={Mui.Paper}>
                         <Mui.Table className={classes.table} aria-label="customized table">
@@ -122,7 +114,7 @@ export default function Appointment(props) {
                                 {props.appointments.map((appointment) => (
                                     <StyledTableRow key={appointment._id}>
                                         <StyledTableCell component="th" scope="row">
-                                            {appointment.patient.firstName} {appointment.patient.lastName}
+                                            <a href={`/profile/${appointment.patient._id}`}>{appointment.patient.firstName} {appointment.patient.lastName}</a>
                                         </StyledTableCell>
                                         <StyledTableCell align="right">{appointment.time}</StyledTableCell>
                                         <StyledTableCell align="right">{appointment.date}</StyledTableCell>

@@ -171,7 +171,7 @@ const Profile = (props) => {
                         <hr></hr>
                         <Mui.ThemeProvider theme={theme}>
                     <Mui.Container style={{"marginLeft":"-4%"}}>
-                        <Mui.Typography
+                        {user._id === props.id ?<> <Mui.Typography
                             variant={"h6"}
                             component={"div"}
                             color={"primary"}
@@ -248,7 +248,7 @@ const Profile = (props) => {
                                         </Mui.Button>
                                 </Mui.Grid>
                             </Mui.Grid>
-                        </form>
+                        </form> </>: ""}
                     </Mui.Container>
                 </Mui.ThemeProvider>
                     </div>
@@ -293,7 +293,9 @@ const Profile = (props) => {
                     </div>
                 </div>
             </div>
+            <a href={`/chat/${user._id}`}>Chat</a>
         </div>
+        
     )
 }
 

@@ -16,7 +16,7 @@ const HistorySchema = new mongoose.Schema({
     medicines: String,
     dose: Number,
 },{timestamps:true});
-
+    
 const SpecializationSchema = new mongoose.Schema({
     name:String,
 },{timestamps: true});

@@ -172,7 +172,7 @@ const DoctorDetails = (props) => {
                             <h4>{user.firstName} {user.lastName}</h4>
                             <ul class="nav nav-tabs" id="myTab" role="tablist">
                                 <li class="nav-item">
-                                    <p class="nav-link active" >Appointments</p>
+                                    <p class="nav-link active" >Appointments Schedule</p>
                                 </li>
                             </ul>
                         </div>
