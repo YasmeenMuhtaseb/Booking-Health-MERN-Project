@@ -4,6 +4,7 @@ import ImgMediaCard from '../Card/ImgMediaCard'
 import SearchComponent from '../Search/SearchComponent'
 
 
+
 const Specializations = () => {
     const [loaded, setLoaded] = useState(false);
     const [specializations, setSpecializations] = useState([]);

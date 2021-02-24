@@ -68,7 +68,7 @@ const UserSchema = new mongoose.Schema(
         default:0,
     },
     profile: { type: mongoose.Schema.Types.ObjectId, ref: 'Profile' },
-    history: { type: mongoose.Schema.Types.ObjectId, ref: 'History'},
+    history: [{ type: mongoose.Schema.Types.ObjectId, ref: 'History'}],
     appointment:[{type: mongoose.Schema.Types.ObjectId, ref:'Appointment'}],
     },{ timestamps: true }
 );

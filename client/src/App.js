@@ -6,6 +6,7 @@ import { Router } from '@reach/router'
 import  Home  from './components/Home/Home'
 import AllDoctors from './components/AllDoctors/AllDoctors'
 import Message from './components/Chat/Message';
+import Profile from './components/profile/profile';
 
 
 
@@ -21,8 +22,10 @@ function App() {
         <DoctorDetails path="/profile/:id"/>
         <Specializations path="/specializations" />
         <AllDoctors path="/doctors" />
+        <Profile path="/myProfile/:id"/>
       </Router>
-      <Message />
+      
+      {/* <Message /> */}
     </div>
   );
 }

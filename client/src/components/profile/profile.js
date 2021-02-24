@@ -1,11 +1,14 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './profileStyle.css';
 import * as Mui from "@material-ui/core";
 import "fontsource-roboto";
-import {blue, cyan} from "@material-ui/core/colors";
+import { blue, cyan } from "@material-ui/core/colors";
 import * as MuiIcons from "@material-ui/icons";
 import profile from '../../Images/profile.png';
+import Cookies from 'universal-cookie';
+import axios from 'axios'
+
 
 const theme = Mui.createMuiTheme({
     palette: {
@@ -16,9 +19,9 @@ const theme = Mui.createMuiTheme({
             main: blue[500],
         }
     },
-    typography:{
-        h1:{
-            fontSize:60,
+    typography: {
+        h1: {
+            fontSize: 60,
         }
     },
 
@@ -56,36 +59,92 @@ const useStyles = Mui.makeStyles({
     },
 });
 
-const Profile = () => {
+const Profile = (props) => {
     const classes = useStyles();
+    const cookies = new Cookies();
+    const user = cookies.get('user')
+    const [illness, setIllness] = useState("")
+    const [date, setDate] = useState("")
+    const [medicines, setMedicines] = useState("")
+    const [dose, setDose] = useState("")
+    const [updated, setUpdated] = useState([])
+    // const[newuser,setNewuser]=useState([])
+
+
+    useEffect(() => {
+        axios.get("http://localhost:8000/api/findUser/"+user._id)
+            .then(res => {
+                setUpdated(res.data.history,console.log("gggggggggggggggggg"+updated));
+            })
+            // setLoaded(true);
+    }, [])
+
+    const medicinesHandler = e => {
+        setMedicines(e.target.value)
+    }
+
+    const doseHandler = e => {
+        setDose(e.target.value)
+    }
+
+    const dateHandler = e => {
+        setDate(e.target.value)
+    }
+
+    const illnessHandler = e => {
+        setIllness(e.target.value)
+    }
+
+    const submitHandler = (e) => {
+        console.log(illness)
+        e.preventDefault();
+        axios.post("http://localhost:8000/api/createHistory/" + user._id, {
+            illness,
+            medicines,
+            dose,
+            date,
+        })
+            .then(res => {
+                setUpdated(res.data.history)
+                console.log(res.date.history)
+                setDate("");
+                setDose("");
+                setIllness("");
+                setMedicines("");
+            })
+
+            .catch(err => console.log(err))
+    }
     return (
         <div>
+            {console.log(updated)}
+            {console.log(user)}
             <div class="container emp-profile">
                 <div class="row">
                     <div class="col-md-3">
                         <div class="profile-img">
-                            <img src={profile} alt=""/>
+                            <img src={profile} alt="" />
                             <Mui.Button
-                            startIcon={<MuiIcons.Update/>}
-                            variant={"contained"}
-                            onClick={() => alert("Form is submitted!!")}
-                            color={"primary"}
-                            size={"small"}
-                            style={
-                                {fontSize: 15, marginTop: "3%",marginLeft: "3%" ,"width": "100%"}
-                            }
-                        >
-                            Upload Picture 
+                                startIcon={<MuiIcons.Update />}
+                                variant={"contained"}
+                                onClick={() => alert("Form is submitted!!")}
+                                color={"primary"}
+                                size={"small"}
+                                style={
+                                    { fontSize: 15, marginTop: "3%", marginLeft: "3%", "width": "100%" }
+                                }
+                            >
+                                Upload Picture
                         </Mui.Button>
                         </div>
                         <div class="row">
-                            <h6 className="content">Email: y.muhtaseb95@gmail.com</h6>
-                            <h6 className="content">Phone Number: 0599572149</h6>
+                            <h6 className="content">Email:{user.email}</h6>
+                            <h6 className="content">Phone Number: {user.phoneNumber}</h6>
                         </div>
                     </div>
                     <div class="col-md-9">
                         <div class="profile-head">
-                            <h4>Yasmeen Muhtaseb</h4>
+                            <h4>{user.firstName} {user.lastName}</h4>
                             <ul class="nav nav-tabs" id="myTab" role="tablist">
                                 <li class="nav-item">
                                     <p class="nav-link active" >Medical History</p>
@@ -93,125 +152,125 @@ const Profile = () => {
                             </ul>
                         </div>
                         <Mui.ThemeProvider theme={theme}>
-            <Mui.Container  style={{"text-align": "center"}}>
-                <Mui.Grid container xs={12}>
-                    <Mui.TableContainer component={Mui.Paper}>
-                        <Mui.Table className={classes.table} aria-label="customized table">
-                            <Mui.TableHead>
-                                <Mui.TableRow>
-                                    <StyledTableCell>illness</StyledTableCell>
-                                    <StyledTableCell >Date</StyledTableCell>
-                                    <StyledTableCell >Medicines</StyledTableCell>
-                                    <StyledTableCell>Dose</StyledTableCell>
-                                </Mui.TableRow>
-                            </Mui.TableHead>
-                            {/* <Mui.TableBody>
-                                {doctors.map((doctor) => (
-                                    <StyledTableRow key={doctor._id}>
-                                        <StyledTableCell component="th" scope="row">
+                            <Mui.Container style={{ "text-align": "center" }}>
+                                <Mui.Grid container xs={12}>
+                                    <Mui.TableContainer component={Mui.Paper}>
+                                        <Mui.Table className={classes.table} aria-label="customized table">
+                                            <Mui.TableHead>
+                                                <Mui.TableRow>
+                                                    <StyledTableCell>illness</StyledTableCell>
+                                                    <StyledTableCell >Date</StyledTableCell>
+                                                    <StyledTableCell >Medicines</StyledTableCell>
+                                                    <StyledTableCell>Dose</StyledTableCell>
+                                                </Mui.TableRow>
+                                            </Mui.TableHead>
+                                            <Mui.TableBody>
+                                {updated.map((his) => (
+                                    <StyledTableRow key={his._id}>
+                                        {/* <StyledTableCell component="th" scope="row">
                                             {doctor.firstName} {doctor.lastName}
-                                        </StyledTableCell>
-                                        <StyledTableCell align="right">{doctor.profile.specialization}</StyledTableCell>
-                                        <StyledTableCell align="right">{doctor.profile.location}</StyledTableCell>
-                                        <StyledTableCell align="right">{doctor.phoneNumber}</StyledTableCell>
-                                        <StyledTableCell align="right"><Link to={`/profile/${doctor._id}`}>Check Profile</Link></StyledTableCell>
+                                        </StyledTableCell> */}
+                                        <StyledTableCell align="right">{his.illness}</StyledTableCell>
+                                        <StyledTableCell align="right">{his.date}</StyledTableCell>
+                                        <StyledTableCell align="right">{his.medicines}</StyledTableCell>
+                                        <StyledTableCell align="right">{his.dose}</StyledTableCell>
+                                        {/* <StyledTableCell align="right"><Link to={`/profile/${doctor._id}`}>Check Profile</Link></StyledTableCell> */}
                                     </StyledTableRow>
                                 ))}
-                            </Mui.TableBody> */}
-                        </Mui.Table>
-                    </Mui.TableContainer>
-                </Mui.Grid>
-            </Mui.Container>
-        </Mui.ThemeProvider>
+                            </Mui.TableBody>
+                                        </Mui.Table>
+                                    </Mui.TableContainer>
+                                </Mui.Grid>
+                            </Mui.Container>
+                        </Mui.ThemeProvider>
                     </div>
                 </div>
+
                 <Mui.ThemeProvider theme={theme}>
-            <Mui.Container>
-            <Mui.Typography
-                    variant={"h5"}
-                    component={"div"}
-                    color={"primary"}
-                    style ={{"marginBottom": "-3%"}}
-                >
-                    Add Medical History
-                </Mui.Typography>
-
-                <Mui.Grid container spacing={2} justify="center" lg={12}
-                          style={{"text-align": "center", "marginTop": "20px"}}>
-                    <Mui.Grid item lg={12}>
-                        <Mui.TextField
-                            variant={"outlined"}
+                    <Mui.Container>
+                        <Mui.Typography
+                            variant={"h5"}
+                            component={"div"}
                             color={"primary"}
-                            type={"text"}
-                            label={"Illness"}
-                            placeholder={"Illness"}
-                            autoFocus={true}
-                            size={"small"}
-                            margin={"normal"}
-                            style={{"width": "20%"}}
-
-                        />
-                    </Mui.Grid>
-
-                    <Mui.Grid item lg={12}>
-
-                        <Mui.TextField
-                            variant={"outlined"}
-                            color={"primary"}
-                            type={"text"}
-                            label={"Medicine"}
-                            placeholder={"Aspirin, etc..."}
-                            size={"small"}
-                            style={{"width": "20%"}}
-
-                        />
-
-                        <Mui.Grid item lg={12} style={{"marginTop": "10px"}}>
-                            <Mui.TextField
-                                variant={"outlined"}
-                                color={"primary"}
-                                type={"text"}
-                                label={"Dosage"}
-                                size={"small"}
-                                margin={"normal"}
-                                style={{"width": "20%"}}
-
-
-                            />
-                        </Mui.Grid>
-
-                        <Mui.Grid item lg={12} style={{"marginTop": "0px"}}>
-                            <Mui.TextField
-                                variant={"outlined"}
-                                color={"primary"}
-                                type={"date"}
-                                label={""}
-                                size={"small"}
-                                margin={"normal"}
-                                style={{"width": "20%"}}
-
-
-                            />
-                        </Mui.Grid>
-
-
-                        <Mui.Button
-                            startIcon={<MuiIcons.Save/>}
-                            variant={"contained"}
-                            onClick={() => alert("Form is submitted!!")}
-                            color={"primary"}
-                            size={"small"}
-                            style={
-                                {fontSize: 15, marginTop: "20px", "width": "20%"}
-                            }
+                            style={{ "marginBottom": "-3%" }}
                         >
-                            Submit 
-                        </Mui.Button>
+                            Add Medical History
+                            </Mui.Typography>
+                        <form onSubmit={submitHandler}>
+                            <Mui.Grid container spacing={2} justify="center" lg={12}
+                                style={{ "text-align": "center", "marginTop": "20px" }}>
+                                <Mui.Grid item lg={12}>
+                                    <Mui.TextField
+                                        variant={"outlined"}
+                                        color={"primary"}
+                                        type={"text"}
+                                        label={"Illness"}
+                                        placeholder={"Illness"}
+                                        autoFocus={true}
+                                        size={"small"}
+                                        margin={"normal"}
+                                        style={{ "width": "20%" }}
+                                        name="illness"
+                                        onChange={illnessHandler}
+                                    />
+                                </Mui.Grid>
+                                <Mui.Grid item lg={12}>
+                                    <Mui.TextField
+                                        variant={"outlined"}
+                                        color={"primary"}
+                                        type={"text"}
+                                        label={"Medicine"}
+                                        placeholder={"Aspirin, etc..."}
+                                        size={"small"}
+                                        style={{ "width": "20%" }}
+                                        name="medicines"
+                                        onChange={medicinesHandler}
+                                    />
+                                    <Mui.Grid item lg={12} style={{ "marginTop": "10px" }}>
+                                        <Mui.TextField
+                                            variant={"outlined"}
+                                            color={"primary"}
+                                            type={"text"}
+                                            label={"Dosage"}
+                                            size={"small"}
+                                            margin={"normal"}
+                                            style={{ "width": "20%" }}
+                                            name="dose"
+                                            onChange={doseHandler}
+                                        />
+                                    </Mui.Grid>
+                                    <Mui.Grid item lg={12} style={{ "marginTop": "0px" }}>
+                                        <Mui.TextField
+                                            variant={"outlined"}
+                                            color={"primary"}
+                                            type={"date"}
+                                            label={""}
+                                            size={"small"}
+                                            margin={"normal"}
+                                            style={{ "width": "20%" }}
+                                            name="date"
+                                            onChange={dateHandler}
+                                        />
+                                    </Mui.Grid>
+                                    <Mui.Button
+                                    type="submit"
+                                        startIcon={<MuiIcons.Save />}
+                                        variant={"contained"}
+                                        // onClick={() => alert("Form is submitted!!")}
+                                        color={"primary"}
+                                        size={"small"}
+                                        style={
+                                            { fontSize: 15, marginTop: "20px", "width": "20%" }
+                                        }
+                                    >
+                                        Submit
+                                        </Mui.Button>
+                                </Mui.Grid>
+                            </Mui.Grid>
+                        </form>
+                    </Mui.Container>
+                </Mui.ThemeProvider>
 
-                    </Mui.Grid>
-                </Mui.Grid>
-            </Mui.Container>
-        </Mui.ThemeProvider>
             </div>
         </div>
     )

@@ -40,6 +40,8 @@ const logout =(e) =>{
     axios.get("http://localhost:8000/api/logout",{withCredentials:true})
     .then(res => {
         setLoginReRender(false)
+        console.log(cookies.get('user'))
+        navigate("/")
     })
     .catch(err => console.log(err))
 }

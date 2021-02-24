@@ -67,7 +67,7 @@ module.exports.createProfile  = (req, res) => {
     .catch(err => res.json(err))
 }
 module.exports.findUser = (req,res) => {
-    User.findOne({_id:req.params.id}).populate('profile')
+    User.findOne({_id:req.params.id}).populate('profile').populate('history')
     .then(user => res.json(user))
     .catch(err => res.json(err))
 }
@@ -115,7 +115,11 @@ module.exports.findHistories = (req, res) => {
 
 module.exports.createHistory = (req, res) => {
     History.create(req.body)
-    .then(history => res.json(history))
+    .then(history => User.findOne({_id:req.params.id})
+    .then(user =>{ user.history=[...user.history,history._id]
+    User.findOneAndUpdate({_id:user._id},{history:user.history},{new:true}).populate("history")
+        .then(updated=>res.json(updated))})
+    )
     .catch(err => console.log(err))
 }
 
