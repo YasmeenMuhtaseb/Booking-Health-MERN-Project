@@ -88,6 +88,16 @@ const DoctorDetails = (props) => {
             .catch(err => console.log(err))
     }, [])
 
+    const approveHandler = (patientId, doctorId, appointmentId) => {
+        axios.put('http://localhost:8000/api/addAppointment/'+patientId +"/" + doctorId +"/"+appointmentId)
+        .then(res => {
+            axios.get('http://localhost:8000/api/findAppointment')
+            .then(res => {
+                setAppointments(res.data);})
+        })
+        .catch(err => console.log(err))
+    }
+
 
     const dateHandler = e => {
         setDate(e.target.value)
@@ -144,7 +154,7 @@ const DoctorDetails = (props) => {
                                 </li>
                             </ul>
                         </div>
-                        <Appointment viewer={user} appointments={appointments}/>
+                        <Appointment approve={approveHandler} viewer={user} appointments={appointments}/>
                     </div>
                 </div>
                 {isPatient ? <form onSubmit={submitHandler}>

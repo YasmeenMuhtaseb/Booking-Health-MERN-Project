@@ -58,16 +58,14 @@ const useStyles = Mui.makeStyles({
 });
 
 function ButtonApprove(props) {
-    const [reRender, setReRender] = useState(props.reRender)
-    const approveHandler = e => {
-        axios.put('http://localhost:8000/api/addAppointment/'+props.patientId +"/" + props.doctorId +"/"+props.appointmentId)
-        .then(res => props.approved(!reRender))
-        .catch(err => console.log(err))
+        
+    const liftHandler = e => {
+        props.approved(props.patientId, props.doctorId, props.appointmentId);
     }
         return <Mui.Button
         startIcon={<MuiIcons.Done/>}
         variant={"contained"}
-        onClick={approveHandler}
+        onClick={liftHandler}
         color={"primary"}
         size={"small"}
         style={
@@ -97,19 +95,9 @@ export default function Appointment(props) {
     const classes = useStyles();
     const cookies = new Cookies();
     const user = cookies.get('user');
-    const [reRender, setReRender] = useState(true);
-
-    const renderHandler = (reRender) => {
-        setReRender(reRender);
-    }
-
-    useEffect(()=> {
-        setReRender(true);
-    },[reRender])
 
     return (
         <Mui.ThemeProvider theme={theme}>
-            {console.log(reRender)}
             <Mui.Container maxWidth={"lg"} style={{"text-align": "center"}}>
                 <Mui.Typography
                     variant={"h1"}
@@ -138,7 +126,7 @@ export default function Appointment(props) {
                                         </StyledTableCell>
                                         <StyledTableCell align="right">{appointment.time}</StyledTableCell>
                                         <StyledTableCell align="right">{appointment.date}</StyledTableCell>
-                                        {user._id === props.viewer._id && appointment.status === false? <StyledTableCell align="right"><ButtonApprove reRender={reRender} approved={renderHandler} patientId={appointment.patient._id} doctorId={appointment.doctor._id} appointmentId={appointment._id}/>     <ButtonReject/></StyledTableCell> : "" }
+                                        {user._id === props.viewer._id && appointment.status === false? <StyledTableCell align="right"><ButtonApprove approved={props.approve} patientId={appointment.patient._id} doctorId={appointment.doctor._id} appointmentId={appointment._id}/>     <ButtonReject/></StyledTableCell> : "" }
                                     </StyledTableRow>
                                 ))}
                             </Mui.TableBody>
