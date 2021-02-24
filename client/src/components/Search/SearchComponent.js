@@ -1,22 +1,33 @@
 import React, { useEffect, useState } from 'react';
-import { makeStyles } from '@material-ui/core/styles';
+import { createMuiTheme, makeStyles, ThemeProvider } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
 import SearchIcon from '@material-ui/icons/Search';
 import IconButton from '@material-ui/core/IconButton';
 import Icon from '@material-ui/core/Icon';
 import MaterialButton from '../Button/MaterialButton';
+import { cyan } from '@material-ui/core/colors';
+
+const theme = createMuiTheme({
+    palette: {
+        primary: {
+            main: cyan[600],
+        },
+        secondary: {
+            main: cyan[600],
+        }
+    }
+
+});
 
 const useStyles = makeStyles((theme) => ({
 root: {
     '& > *': {
-    // margin: theme.spacing(1),
-    // width: '25ch',
+    marginTop: '1%',
     },
 },
 searchIcon: {
     display: "inline-block",
-    marginTop: '15px',
-    marginRight: '10px',
+    marginTop: '2%',
 }
 }));
 
@@ -39,9 +50,12 @@ const searchHandler = (e) => {
 }
 
 return (
-    <form className={classes.root} noValidate autoComplete="off">    
-    <TextField id="standard-basic" label="Search" onChange={searchHandler} />
-    <div className={classes.searchIcon}><IconButton color="primary"><SearchIcon /></IconButton></div>
-    </form>
+    <ThemeProvider theme={theme}>
+        <form className={classes.root} noValidate autoComplete="off">    
+        <TextField style={{width: '23%', marginLeft: '2%'}} id="standard-basic" label="Search" onChange={searchHandler} />
+        <div className={classes.searchIcon}><IconButton color="primary"><SearchIcon /></IconButton></div>
+        </form>
+    </ThemeProvider>
+    
 );
 }

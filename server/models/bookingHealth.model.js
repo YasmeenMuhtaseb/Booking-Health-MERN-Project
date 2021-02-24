@@ -7,25 +7,28 @@ const AppointmentSchema = new mongoose.Schema({
         required:[true,'Time is required']
     },
     date: String,
+    status: {type: Boolean, default: false},
     patient: { type: mongoose.Schema.Types.ObjectId, ref: 'User' },
     doctor: { type: mongoose.Schema.Types.ObjectId, ref: 'User' },
 },{timestamps:true});
 const HistorySchema = new mongoose.Schema({
     illness: String,
-    date: Date,
+    date: String,
     medicines: String,
-    dose: Number,
+    dose: String,
 },{timestamps:true});
-    
+
 const SpecializationSchema = new mongoose.Schema({
     name:String,
+    description: String,
+    img: String,
 },{timestamps: true});
 
 const ProfileSchema = new mongoose.Schema(
     {
-        location:String,
         education:String,
         specialization: String,
+        about: String,
     },{ timestamps: true }
     );
 const UserSchema = new mongoose.Schema(
@@ -49,12 +52,9 @@ const UserSchema = new mongoose.Schema(
         },
     },
     phoneNumber:{
-        type: Number,
+        type: String,
         minlength:[10,"Please Enter a valid Number"],
         required: [true, "Phone Number is required"],
-    },
-    about: {
-        type: String,
     },
     password: {
         type: String,

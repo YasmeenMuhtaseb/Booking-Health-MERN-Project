@@ -9,6 +9,7 @@ import Message from './components/Chat/Message';
 import Profile from './components/profile/profile';
 import Profiles from './components/Profiles/Profiles';
 import { useState } from 'react';
+import Doctors from './components/Doctors/Doctors';
 
 
 
@@ -28,6 +29,7 @@ function App() {
         <Home path="/" />
         <Profiles path="/profile/:id" reRender={reRenderNav}/>
         <Specializations path="/specializations" />
+        <Doctors path="/doctors/:name" />
         <AllDoctors path="/doctors" />
         <Message path="/chat/:id"/>
         

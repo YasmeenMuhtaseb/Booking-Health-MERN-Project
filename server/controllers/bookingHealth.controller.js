@@ -113,6 +113,9 @@ module.exports.addAppointment = (req, res) => {
     User.findOneAndUpdate({_id:req.params.patientid},{$addToSet: {appointment:req.params.appointmentid}},{new:true,runValidators:true})
     .then(updatedUser => res.json(updatedUser))
     .catch(err => console.log(err));
+    Appointment.findOneAndUpdate({_id:req.params.appointmentid}, {status: true},{new:true,runValidators:true})
+    .then(updatedApp => res.json(updatedApp))
+    .catch(err => console.log(err))
 }
 
 module.exports.findHistories = (req, res) => {

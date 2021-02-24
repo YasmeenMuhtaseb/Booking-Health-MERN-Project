@@ -75,12 +75,12 @@ const AllDoctors = () => {
 
     return (
         <Mui.ThemeProvider theme={theme}>
-            <Mui.Container maxWidth={"lg"} style={{"text-align": "center"}}>
+            <Mui.Container maxWidth={"lg"} style={{"text-align": "left"}}>
                 <Mui.Typography
-                    variant={"h1"}
+                    variant={"h3"}
                     component={"div"}
                     color={"primary"}
-                    style={{"marginBottom":"10px"}}
+                    style={{"marginBottom":"10px", marginTop: '10px'}}
                 >
                     Our Doctors
                 </Mui.Typography>
@@ -90,10 +90,10 @@ const AllDoctors = () => {
                             <Mui.TableHead>
                                 <Mui.TableRow>
                                     <StyledTableCell>Doctor Name</StyledTableCell>
-                                    <StyledTableCell align="right">Specialization</StyledTableCell>
-                                    <StyledTableCell align="center" style={{"paddingLeft":"12em"}}>Location</StyledTableCell>
-                                    <StyledTableCell align="center" style={{"paddingLeft":"12em"}}>Phone Number</StyledTableCell>
-                                    <StyledTableCell align="right" style={{"paddingRight":"3em"}}>Profile</StyledTableCell>
+                                    <StyledTableCell >Specialization</StyledTableCell>
+                                    <StyledTableCell >Education</StyledTableCell>
+                                    <StyledTableCell >Phone Number</StyledTableCell>
+                                    <StyledTableCell >Profile</StyledTableCell>
                                 </Mui.TableRow>
                             </Mui.TableHead>
                             <Mui.TableBody>
@@ -102,10 +102,10 @@ const AllDoctors = () => {
                                         <StyledTableCell component="th" scope="row">
                                             {doctor.firstName} {doctor.lastName}
                                         </StyledTableCell>
-                                        <StyledTableCell align="right">{doctor.profile.specialization}</StyledTableCell>
-                                        <StyledTableCell align="right">{doctor.profile.location}</StyledTableCell>
-                                        <StyledTableCell align="right">{doctor.phoneNumber}</StyledTableCell>
-                                        <StyledTableCell align="right"><Link to={`/profile/${doctor._id}`}>Check Profile</Link></StyledTableCell>
+                                        <StyledTableCell >{doctor.profile.specialization}</StyledTableCell>
+                                        <StyledTableCell >{doctor.profile.education}</StyledTableCell>
+                                        <StyledTableCell >{doctor.phoneNumber}</StyledTableCell>
+                                        <StyledTableCell ><Link to={`/profile/${doctor._id}`}>Check Profile</Link></StyledTableCell>
                                     </StyledTableRow>
                                 ))}
                             </Mui.TableBody>

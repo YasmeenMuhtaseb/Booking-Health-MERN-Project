@@ -18,9 +18,9 @@ function AboutUs() {
             <section id="hero" className="d-flex align-items-center">
                 <div className="container">
                     <div className="row">
-                        <div className="col-lg-6 d-flex flex-column justify-content-center pt-4 pt-lg-0 order-2 order-lg-1"
+                        <div style={{marginTop: '-65px'}} className="col-lg-6 d-flex flex-column justify-content-center pt-4 pt-lg-0 order-2 order-lg-1"
                             data-aos="fade-up" data-aos-delay="200">
-                            <h1 className ="fontStyle">Your health is our top priority and concern</h1>
+                            <h1 >Your health is our top priority and concern</h1>
                             <h2 className ="fontStyle">Our doctors give the most sincere services. <br/> Our doctors are very experienced and offer the best services for each patient. Your safety is guaranteed on Booking Health.</h2>
                         </div>
                         <div className="col-lg-6 order-1 order-lg-2 hero-img" data-aos="zoom-in" data-aos-delay="200">
@@ -61,7 +61,7 @@ function AboutUs() {
                 <div class="container" data-aos="fade-up">
                     <div class="section-title">
                         <h2>Team</h2>
-                        <p >We are a Team of experienced students of the AXSOS Academy.</p>
+                        <p className ="fontStyle">We are a Team of experienced students of the AXSOS Academy.</p>
                     </div>
                     <div class="row">
                         <div class="col-lg-6 mt-3">

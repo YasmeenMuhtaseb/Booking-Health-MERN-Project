@@ -76,8 +76,9 @@ const Profile = (props) => {
 
 
     useEffect(() => {
-        axios.get("http://localhost:8000/api/findUser/"+cookies.get("user")._id)
+        axios.get("http://localhost:8000/api/findUser/"+props.id)
             .then(res => {
+                console.log(cookies.get('user'))
                 setUpdated(res.data.history,console.log("gggggggggggggggggg"+updated));
                 setUser(res.data)
             })
@@ -117,7 +118,6 @@ const Profile = (props) => {
                 setIllness("");
                 setMedicines("");
             })
-
             .catch(err => console.log(err))
     }
 
@@ -129,10 +129,9 @@ const Profile = (props) => {
         axios.put('http://localhost:8000/api/user/' + user._id, formData)
             .then(res => props.reRender());
     }
+
     return (
         <div>
-            {console.log(updated)}
-            {console.log(user)}
             <div class="container emp-profile">
                 <div class="row">
                     <div class="col-md-3">
@@ -141,7 +140,6 @@ const Profile = (props) => {
                             <img src={`../img/${user.image}`} alt="" />:
                             <img src={profile} alt="" />
                             }
-                            
                         {user._id === props.id? <form onSubmit={updateProfilePicture} style ={{marginTop: "7%"}}>
                             <TextField
                                 id="upload image"
@@ -277,10 +275,10 @@ const Profile = (props) => {
                                             <Mui.TableBody>
                                 {updated.map((his) => (
                                     <StyledTableRow key={his._id}>
-                                        <StyledTableCell align="right">{his.illness}</StyledTableCell>
-                                        <StyledTableCell align="right">{his.date}</StyledTableCell>
-                                        <StyledTableCell align="right">{his.medicines}</StyledTableCell>
-                                        <StyledTableCell align="right">{his.dose}</StyledTableCell>
+                                        <StyledTableCell >{his.illness}</StyledTableCell>
+                                        <StyledTableCell >{his.date}</StyledTableCell>
+                                        <StyledTableCell >{his.medicines}</StyledTableCell>
+                                        <StyledTableCell >{his.dose}</StyledTableCell>
 
                                     </StyledTableRow>
                                 ))}
@@ -295,7 +293,6 @@ const Profile = (props) => {
             </div>
             <a href={`/chat/${user._id}`}>Chat</a>
         </div>
-        
     )
 }
 

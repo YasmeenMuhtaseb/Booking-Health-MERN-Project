@@ -13,11 +13,13 @@
   .fontStyle{
     font-weight: bold;
       font-size: 120%;
-      color: #746f6f;}
+      color: #746f6f;
+      text-align: center;}
   .fontStyle1{
       font-family: cursive;
       font-size: 120%;
       color: #746f6f;
+      text-align: center;
   }
   #hero {
     width: 100%;
@@ -32,17 +34,19 @@
   }
   
   #hero h1 {
-    margin: 0 0 10px 0;
-    font-size: 48px;
+    margin: 0 0 0 0;
     font-weight: 700;
     line-height: 56px;
     color: #fff;
+
   }
   
   #hero h2 {
     color: rgba(255, 255, 255, 0.6);
     margin-bottom: 50px;
     font-size: 24px;
+    font-family: cursive;
+
   }
   
 

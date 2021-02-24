@@ -85,7 +85,11 @@ const DoctorDetails = (props) => {
         }
         axios.get('http://localhost:8000/api/findAppointment')
             .then(res => {
-                setAppointments(res.data);
+                setAppointments(res.data.filter((appointment) => {
+                    if(appointment.doctor._id === props.id){
+                        return appointment;
+                    }
+                }));
                 setLoaded(true);
             })
             .catch(err => console.log(err))
@@ -96,7 +100,11 @@ const DoctorDetails = (props) => {
         .then(res => {
             axios.get('http://localhost:8000/api/findAppointment')
             .then(res => {
-                setAppointments(res.data);})
+                setAppointments(res.data.filter((appointment) => {
+                    if(appointment.doctor._id === props.id){
+                        return appointment;
+                    }
+                }));})
         })
         .catch(err => console.log(err))
     }
@@ -142,6 +150,7 @@ const DoctorDetails = (props) => {
                                 <img src={profile} alt="" />
                             }
                             {user._id === props.id? <form onSubmit={updateProfilePicture} style ={{marginTop: "7%"}}>
+                            <Mui.ThemeProvider theme={theme}>
                             <TextField
                                 id="upload image"
                                 label=""
@@ -160,10 +169,11 @@ const DoctorDetails = (props) => {
                             >
                                 Update Picture
                             </Button>
+                            </Mui.ThemeProvider>
                             </form> : ""}
                         </div>
                         <div class="row">
-                            <h6 className="content">Email:{user.email}</h6>
+                            <h6 className="content">Email: {user.email}</h6>
                             <h6 className="content">Phone Number: {user.phoneNumber}</h6>
                         </div>
                     </div>
