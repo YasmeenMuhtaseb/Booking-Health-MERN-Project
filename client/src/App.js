@@ -31,8 +31,7 @@ function App() {
         <Specializations path="/specializations" />
         <Doctors path="/doctors/:name" />
         <AllDoctors path="/doctors" />
-        <Message path="/chat/:id"/>
-        
+        <Message path="/chat/:id" />
       </Router>
       
       {/* <Message /> */}

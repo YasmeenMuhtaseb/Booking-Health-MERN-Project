@@ -10,6 +10,8 @@ import axios from 'axios'
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import { Link } from '@reach/router';
+import Cookies from 'universal-cookie';
+import InsertCommentIcon from '@material-ui/icons/InsertComment';
 
 
 const theme = Mui.createMuiTheme({
@@ -70,6 +72,9 @@ const Profile = (props) => {
     const [dose, setDose] = useState("")
     const [updated, setUpdated] = useState([])
     const [filename,setFilename] = useState("")
+    const cookies = new Cookies();
+    const viewer = cookies.get('user')
+    const [appointments, setAppointments] = useState([])
 
     // const[newuser,setNewuser]=useState([])
 
@@ -77,9 +82,17 @@ const Profile = (props) => {
     useEffect(() => {
         axios.get("http://localhost:8000/api/findUser/"+props.id)
             .then(res => {
-                setUpdated(res.data.history,console.log("gggggggggggggggggg"+updated));
+                setUpdated(res.data.history);
                 setUser(res.data)
             })
+        axios.get("http://localhost:8000/api/findAppointment")
+            .then(res => {
+                setAppointments(res.data.filter((appointment) => {
+                    if(appointment.patient._id === user._id){
+                        return appointment;
+                    }
+                })
+            )})
             // setLoaded(true);
     }, [user.image])
 
@@ -138,7 +151,7 @@ const Profile = (props) => {
                             <img src={`../img/${user.image}`} alt="" />:
                             <img src={profile} alt="" />
                             }
-                        {user._id === props.id? <form onSubmit={updateProfilePicture} style ={{marginTop: "7%"}}>
+                        {user._id === viewer._id? <form onSubmit={updateProfilePicture} style ={{marginTop: "7%"}}>
                             <TextField
                                 id="upload image"
                                 label=""
@@ -167,7 +180,7 @@ const Profile = (props) => {
                         <hr></hr>
                         <Mui.ThemeProvider theme={theme}>
                     <Mui.Container style={{"marginLeft":"-4%"}}>
-                        {user._id === props.id ?<> <Mui.Typography
+                        {user._id === viewer._id ?<> <Mui.Typography
                             variant={"h6"}
                             component={"div"}
                             color={"primary"}
@@ -285,11 +298,47 @@ const Profile = (props) => {
                                     </Mui.TableContainer>
                                 </Mui.Grid>
                             </Mui.Container>
+                            <Mui.Container style={{ "text-align": "center" }}>
+                                <Mui.Grid container xs={12}>
+                                    <Mui.TableContainer component={Mui.Paper}>
+                                        <Mui.Table className={classes.table} aria-label="customized table">
+                                            <Mui.TableHead>
+                                                <Mui.TableRow>
+                                                    <StyledTableCell>Doctor</StyledTableCell>
+                                                    <StyledTableCell >Patient</StyledTableCell>
+                                                    <StyledTableCell >Chat</StyledTableCell>
+                                                </Mui.TableRow>
+                                            </Mui.TableHead>
+                                            <Mui.TableBody>
+                                {appointments.map((appointment) => (
+                                    <StyledTableRow key={appointment._id}>
+                                        <StyledTableCell >{appointment.doctor.firstName} {appointment.doctor.lastName}</StyledTableCell>
+                                        <StyledTableCell >{appointment.patient.firstName} {appointment.patient.lastName}</StyledTableCell>
+                                       {user._id === viewer._id ?
+                                       <StyledTableCell ><Button
+                                       startIcon={<InsertCommentIcon />}
+                                       style={{marginTop: '2%'}}
+                                       variant={"contained"}
+                                       color={"primary"}
+                                       size={"small"}
+                                       ><Link style={{color:'white', textDecoration: 'none'}} to={`/chat/${appointment.doctor._id}`}>Chat</Link></Button></StyledTableCell> :viewer._id === appointment.doctor._id? <StyledTableCell ><Button
+                                        startIcon={<InsertCommentIcon />}
+                                        style={{marginTop: '2%'}}
+                                        variant={"contained"}
+                                        color={"primary"}
+                                        size={"small"}
+                                        ><Link style={{color:'white', textDecoration: 'none'}} to={`/chat/${user._id}`}>Chat</Link></Button></StyledTableCell> :""}
+                                    </StyledTableRow>
+                                ))}
+                            </Mui.TableBody>
+                                        </Mui.Table>
+                                    </Mui.TableContainer>
+                                </Mui.Grid>
+                            </Mui.Container>
                         </Mui.ThemeProvider>
                     </div>
                 </div>
             </div>
-            <Link to={`/chat/${user._id}`}>Chat</Link>
         </div>
     )
 }

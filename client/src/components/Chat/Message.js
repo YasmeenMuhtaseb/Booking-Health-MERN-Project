@@ -57,9 +57,12 @@ export default (props) => {
 
   React.useEffect(() => {
     axios.get("http://localhost:8000/api/findUser/"+props.id)
-      .then(res => setUser2(res.data))      
-      setRoom(`${user1.firstName}${user1.lastName}`)
-
+      .then(res => setUser2(res.data))
+      if(user1.role === 1){
+      setRoom(`${props.id}${user1._id}`)
+      } else {
+        setRoom(`${user1._id}${props.id}`)
+      }
 
 
     // console.log("doctorLIST",doctorList[0].userID.name)
@@ -123,21 +126,23 @@ export default (props) => {
           messages &&messages.map(message=>{
             console.log(message)
             return(
-              <p style={{width:"20%",textAlign:"center",marginLeft:"10px", backgroundColor:"green",borderRadius:"20px"}}>{message.message}</p>
+              <p style={{width:"20%",textAlign:"center",marginLeft:"10px", backgroundColor:"#2D6B73",borderRadius:"20px", color:'white'}}>{message.message}</p>
             )
           })
         }
       </div>
       <form
+        style={{marginRight: '5%'}}
         className={classes.root}
         noValidate
         autoComplete="off"
         onSubmit={handleSubmit}
       >
-        <TextField value={message} id="standard-basic" label="Write a message" onChange={(e) => setMessage(e.target.value)}/>
+        <TextField style={{marginRight: '100px'}} value={message} id="standard-basic" label="Write a message" onChange={(e) => setMessage(e.target.value)}/>
 
         {/* <TextField id="filled-basic" label="chat" variant="filled" className={classes.input} /> */}
         <Button
+          style={{width: '10%'}}
           type="submit"
           fullWidth
           variant="contained"

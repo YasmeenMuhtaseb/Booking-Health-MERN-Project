@@ -149,7 +149,7 @@ const DoctorDetails = (props) => {
                                 <img src={`../img/${user.image}`} alt="" />:
                                 <img src={profile} alt="" />
                             }
-                            {user._id === props.id? <form onSubmit={updateProfilePicture} style ={{marginTop: "7%"}}>
+                            {user._id === patient._id? <form onSubmit={updateProfilePicture} style ={{marginTop: "7%"}}>
                             <Mui.ThemeProvider theme={theme}>
                             <TextField
                                 id="upload image"

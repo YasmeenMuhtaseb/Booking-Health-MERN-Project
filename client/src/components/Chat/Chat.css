@@ -8,6 +8,8 @@
     border-radius: 2%; */
     width: 500px;
     height: 450px;
-    margin-left: 350px;
-    margin-top: 10px;
+    margin-left: 400px;
+    margin-top: 30px;
+    border-radius: 5%;
+    padding: 1%;
 }

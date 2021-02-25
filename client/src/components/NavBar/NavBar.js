@@ -9,6 +9,7 @@ import axios from 'axios';
 import {navigate} from '@reach/router'
 import AvatarIm from '../Avatar/AvatarIm';
 import PopUpSignIn from '../PopUpSignIn/PopUpSignIn';
+import {Link} from 'react-scroll';
 
 const useStyles = makeStyles({
     root: {
@@ -56,7 +57,7 @@ const logout =(e) =>{
                 <li><Button className={classes.new} onClick={() => navigate("/")} >Home</Button></li>
                 <li><Button className={classes.new} onClick={() => navigate("/specializations")} >Specializations</Button></li>
                 <li><Button className={classes.new} onClick={() => navigate("/doctors")} >Doctors</Button></li>
-                <li><Button className={classes.new}  >About us</Button></li>
+                <li><Button className={classes.new}  ><Link to="hero" spy={true} smooth={true}>About us</Link></Button></li>
                 { !cookies.get('user')?<div className="log"> <PopUpLogin loginReRender={reRenderHandler} /><PopUpSignIn   loginReRender={reRenderHandler} /></div>:<><AvatarIm reRender={props.render}/> <Button className={classes.log} onClick={logout} >Logout</Button></>}
             </ul>
         </div>

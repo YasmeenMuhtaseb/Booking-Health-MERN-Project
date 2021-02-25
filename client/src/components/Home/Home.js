@@ -10,7 +10,7 @@ const Home = () => {
             <HomePhoto />
             <Special />
             <Corona />
-            <AboutUs  />
+            <AboutUs id="about"  />
         </>
     )
 }
