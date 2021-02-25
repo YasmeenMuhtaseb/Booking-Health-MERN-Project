@@ -6,10 +6,10 @@ import "fontsource-roboto";
 import { blue, cyan } from "@material-ui/core/colors";
 import * as MuiIcons from "@material-ui/icons";
 import profile from '../../Images/profile.png';
-import Cookies from 'universal-cookie';
 import axios from 'axios'
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
+import { Link } from '@reach/router';
 
 
 const theme = Mui.createMuiTheme({
@@ -63,7 +63,6 @@ const useStyles = Mui.makeStyles({
 
 const Profile = (props) => {
     const classes = useStyles();
-    const cookies = new Cookies();
     const [user,setUser] = useState("")
     const [illness, setIllness] = useState("")
     const [date, setDate] = useState("")
@@ -78,7 +77,6 @@ const Profile = (props) => {
     useEffect(() => {
         axios.get("http://localhost:8000/api/findUser/"+props.id)
             .then(res => {
-                console.log(cookies.get('user'))
                 setUpdated(res.data.history,console.log("gggggggggggggggggg"+updated));
                 setUser(res.data)
             })
@@ -291,7 +289,7 @@ const Profile = (props) => {
                     </div>
                 </div>
             </div>
-            <a href={`/chat/${user._id}`}>Chat</a>
+            <Link to={`/chat/${user._id}`}>Chat</Link>
         </div>
     )
 }

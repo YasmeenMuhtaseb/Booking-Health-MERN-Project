@@ -57,10 +57,10 @@ export default (props) => {
 
   React.useEffect(() => {
     axios.get("http://localhost:8000/api/findUser/"+props.id)
-      .then(res => setUser2(res.data))
+      .then(res => setUser2(res.data))      
+      setRoom(`${user1.firstName}${user1.lastName}`)
 
 
-      setRoom(`${user1.firstName} ${user1.lastName} - ${user2.firstName} ${user2.lastName}`)
 
     // console.log("doctorLIST",doctorList[0].userID.name)
 
@@ -105,10 +105,28 @@ export default (props) => {
       }
     };
   }, [socket]);
+  React.useEffect(() => {
+    // console.log('dddd', socket)
+    if (socket) {
+      socket.on("newMessage", (message) => {
+        console.log('emmited message', message)
+        const newMessages = [...messages, message];
+        console.log(newMessages)
+        setMessages(newMessages);
+      });
+    }
+  }, [messages, socket]);
   return (
     <ThemeProvider theme={theme}>
       <div className="show">
-        <p></p>
+        {
+          messages &&messages.map(message=>{
+            console.log(message)
+            return(
+              <p style={{width:"20%",textAlign:"center",marginLeft:"10px", backgroundColor:"green",borderRadius:"20px"}}>{message.message}</p>
+            )
+          })
+        }
       </div>
       <form
         className={classes.root}
@@ -116,7 +134,7 @@ export default (props) => {
         autoComplete="off"
         onSubmit={handleSubmit}
       >
-        <TextField id="standard-basic" label="Write a message" onChange={(e) => setMessage(e.target.value)}/>
+        <TextField value={message} id="standard-basic" label="Write a message" onChange={(e) => setMessage(e.target.value)}/>
 
         {/* <TextField id="filled-basic" label="chat" variant="filled" className={classes.input} /> */}
         <Button

@@ -1,9 +1,13 @@
 .show {
     background-color: #8080808c;
-    min-width: 31%;
+    /* min-width: 31%;
     min-height: 38%;
     margin-left: 33%;
     padding: 16%;
     margin-right: 33%;
-    border-radius: 2%;
+    border-radius: 2%; */
+    width: 500px;
+    height: 450px;
+    margin-left: 350px;
+    margin-top: 10px;
 }

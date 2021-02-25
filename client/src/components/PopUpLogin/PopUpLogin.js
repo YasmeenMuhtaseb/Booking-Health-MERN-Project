@@ -123,13 +123,16 @@ export default (props) => {
       }, {withCredentials: true})
       .then(res => {
         cookies.set("user", res.data.user)
-        setOpen(false);
-        props.loginReRender(!reRendered)
+        props.loginReRender()
         setErrors("")
-
+        
       })
       .catch(err => setErrors(err.response.data.errors))
+      setOpen(false);
   }
+  useEffect(()=>{
+
+  },[reRendered])
 
 
   return (
@@ -144,11 +147,7 @@ export default (props) => {
         className={classes.cont}
         aria-labelledby="form-dialog-title"
       >
-        {/* <DialogTitle id="form-dialog-title">Registration</DialogTitle> */}
         <DialogContent >
-          {/* <DialogContentText>
-            Please fill in your information
-          </DialogContentText> */}
           <form onSubmit={submitHandler} className={classes.form} noValidate>
             <img
               src={logo}
@@ -229,7 +228,7 @@ export default (props) => {
                 />
               </Grid>
             </Grid>
-          <DialogActions>
+          {/* <DialogActions> */}
               { (password.length)<8 ?
           <Button
               fullWidth
@@ -249,18 +248,7 @@ export default (props) => {
               Sign Up
             </Button>}
             <Grid item>
-              {/* <Link href="#" variant="body2" className={classes.linkStyle}>
-                Already have an account? Sign in
-              </Link> */}
             </Grid>
-          
-          {/* <Button onClick={handleClose} color="primary">
-            Cancel
-          </Button>
-          <Button onClick={handleClose} color="primary">
-            Subscribe
-          </Button> */}
-        </DialogActions>
         </form>
         </DialogContent>
       </Dialog>
