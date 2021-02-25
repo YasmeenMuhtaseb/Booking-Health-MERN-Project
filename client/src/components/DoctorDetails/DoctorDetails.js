@@ -140,6 +140,7 @@ const DoctorDetails = (props) => {
     }
 
     return (
+        loaded?
         <div>
             <div class="container emp-profile">
                 <div class="row">
@@ -180,6 +181,8 @@ const DoctorDetails = (props) => {
                     <div class="col-md-9">
                         <div class="profile-head">
                             <h4>{user.firstName} {user.lastName}</h4>
+                            <p align="left">Bio:</p>
+                            <p align="left">{user.profile.about}</p>
                             <ul class="nav nav-tabs" id="myTab" role="tablist">
                                 <li class="nav-item">
                                     <p class="nav-link active" >Appointments Schedule</p>
@@ -189,6 +192,7 @@ const DoctorDetails = (props) => {
                         <Appointment approve={approveHandler} viewer={user} appointments={appointments}/>
                     </div>
                 </div>
+                
                 {isPatient ? <form onSubmit={submitHandler}>
                 <Mui.ThemeProvider theme={theme}>
                     <Mui.Container>
@@ -252,6 +256,7 @@ const DoctorDetails = (props) => {
 
             </div>
         </div>
+        : ""
     )
 }
 

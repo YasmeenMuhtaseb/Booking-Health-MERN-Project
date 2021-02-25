@@ -123,7 +123,7 @@ const Profile = (props) => {
         })
             .then(res => {
                 setUpdated(res.data.history)
-                console.log(res.date.history)
+                console.log("asdfkjgaslkjgfa")
                 setDate("");
                 setDose("");
                 setIllness("");
@@ -201,6 +201,7 @@ const Profile = (props) => {
                                         size={"small"}
                                         margin={"normal"}
                                         style={{ "width": "100%" }}
+                                        value={illness}
                                         name="illness"
                                         onChange={illnessHandler}
                                     />
@@ -215,6 +216,7 @@ const Profile = (props) => {
                                         size={"small"}
                                         style={{ "width": "100%" }}
                                         name="medicines"
+                                        value={medicines}
                                         onChange={medicinesHandler}
                                     />
                                     <Mui.Grid item lg={12} style={{ "marginTop": "10px" }}>
@@ -227,6 +229,7 @@ const Profile = (props) => {
                                             margin={"normal"}
                                             style={{ "width": "100%" }}
                                             name="dose"
+                                            value={dose}
                                             onChange={doseHandler}
                                         />
                                     </Mui.Grid>
@@ -240,6 +243,7 @@ const Profile = (props) => {
                                             margin={"normal"}
                                             style={{ "width": "100%" }}
                                             name="date"
+                                            value={date}
                                             onChange={dateHandler}
                                         />
                                     </Mui.Grid>
